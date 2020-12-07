@@ -1,0 +1,11 @@
+.img {
+    display: flex;
+    margin: 30px;
+    width: 30%;
+    height: 20%;
+}
+
+.name {
+    display: flex;
+    padding: 15px;
+}

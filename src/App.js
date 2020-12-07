@@ -4,9 +4,10 @@ import Homepage from './components/Homepage/Homepage';
 import Default from "./components/Default/Default";
 import verifyPage from './components/SendNote/verifyPage/verifyPage';
 import ShowNote from './components/SendNote/ShowNote/ShowNote';
-//import { BrowserRouter as Router, Switch, Route, Link, NavLink } from "react-router-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
+import AdminPage from './components/AdminPage/AdminPage';
+import DataProcessing from './components/Layout/DataProcessing';
+import ViewPage from './components/User/ViewPage';
 class App extends Component {
 
   handleExtendEvent = (check) => {
@@ -23,10 +24,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={Homepage} />
+          <Route path="/" exact component={AdminPage} />
           <Route path="/home" exact component={Homepage} />
           <Route path="/verify/:shareID" component={verifyPage} />
           <Route path="/showNote/:shareID" component={ShowNote} />
+          <Route path="/data-processing" exact component={DataProcessing} />
+          <Route path="/user" exact component={ViewPage} />
           <Route component={Default} />
         </Switch>
       </BrowserRouter>

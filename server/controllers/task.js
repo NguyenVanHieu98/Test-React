@@ -122,9 +122,11 @@ exports.factory = function (_, util, Task) {
     const exec = util.promisify(require('child_process').exec);
     async function lsWithGrep() {
       try {
-          const { stdout, stderr } = await exec('command.bat');
-          console.log('stdout:', stdout);
-          console.log('stderr:', stderr);
+        console.log('Crawling');
+        await exec('command/bookinghanoi');
+        await exec('command/tripadvisorhanoi');
+        console.log('Done');
+        res.send({ message: "Successfully." })
       }catch (err) {
          console.error(err);
       };

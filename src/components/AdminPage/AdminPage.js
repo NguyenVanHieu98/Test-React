@@ -4,7 +4,6 @@ import { Container } from "react-bootstrap";
 import Header from "../Layout/Header";
 import Body from "../Layout/Body";
 import Footer from "../Layout/Footer";
-import Slidebar from "../Layout/Slidebar";
 
 class AdminPage extends Component {
   constructor(props) {
@@ -29,9 +28,9 @@ class AdminPage extends Component {
     return (
       <div className="App">
         <Container fluid>
-          {/* <Header/> */}
+          <Header/>
           <Body/>
-          {/* <Footer/> */}
+          <Footer/>
         </Container>
       </div>
     );

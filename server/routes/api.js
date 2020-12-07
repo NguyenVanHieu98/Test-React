@@ -2,9 +2,23 @@
 
 exports.name = "routes.api";
 
-exports.requires = ["@express", "controllers.folder", "controllers.note", "controllers.share", "controllers.group", "controllers.task"];
+exports.requires = ["@express", 
+"controllers.folder", 
+"controllers.note", 
+"controllers.share", 
+"controllers.group", 
+"controllers.task",
+"controllers.bookinghanoi",
+"controllers.tripadvisorhanoi"];
 
-exports.factory = function (express, folderController, noteController, shareController, groupController, taskController) {
+exports.factory = function (express, 
+    folderController, 
+    noteController, 
+    shareController, 
+    groupController, 
+    taskController,
+    bookinghanoiController,
+    tripadvisorhanoiController) {
     let router = express.Router();
 
     router.get("/folders", folderController.getFolders);
@@ -41,56 +55,63 @@ exports.factory = function (express, folderController, noteController, shareCont
 
     router.get("/run", taskController.run);
 
-    router.get('/folders', function (req, res, next) {
-        var schema = mongoose.Schema({
-            _id: mongoose.Types.ObjectId,
-            title: String,
-            key: String,
-            isRoot: Boolean,
-            isLeaf: Boolean,
-            parentId: mongoose.Types.ObjectId
-        });
-        var Folders;
-        // try {
-        //     Folders = mongoose.model.Folders;
-        // } catch (error) {
-        //     Folders = mongoose.model("Folders", schema, "folders");
-        // }
-        if (!mongoose.models["folders"]) {
-            Folders = mongoose.model("folders", schema);
-        } else {
-            Folders = mongoose.models["folders"];
-        }
+    router.get("/hotels", bookinghanoiController.getAll);
 
-        Folders.find({}).then(function (folders) {
-            res.json(folders);
-        });
-    });
+    router.get("/tripadvisorhotels", tripadvisorhanoiController.getAll);
+    router.get("/datahotel", tripadvisorhanoiController.getDataByName);
+    router.put("/updatedatas", tripadvisorhanoiController.updateDataHotel);
 
-    router.get('/folders/:folderId', function (req, res, next) {
-        var schema = mongoose.Schema({
-            _id: mongoose.Types.ObjectId,
-            title: String,
-            key: String,
-            isRoot: Boolean,
-            isLeaf: Boolean,
-            parentId: mongoose.Types.ObjectId
-        });
-        var Folders;
-        // try {
-        //     Folders = mongoose.model.Folders;
-        // } catch (error) {
-        //     Folders = mongoose.model("Folders", schema, "folders");
-        // }
-        if (!mongoose.models["folders"]) {
-            Folders = mongoose.model("folders", schema);
-        } else {
-            Folders = mongoose.models["folders"];
-        }
-        Folders.find({ parentId: mongoose.Types.ObjectId(req.params.folderId) }).then(function (folders) {
-            res.json(folders);
-        });
-    });
+
+    // router.get('/folders', function (req, res, next) {
+    //     var schema = mongoose.Schema({
+    //         _id: mongoose.Types.ObjectId,
+    //         title: String,
+    //         key: String,
+    //         isRoot: Boolean,
+    //         isLeaf: Boolean,
+    //         parentId: mongoose.Types.ObjectId
+    //     });
+    //     var Folders;
+    //     // try {
+    //     //     Folders = mongoose.model.Folders;
+    //     // } catch (error) {
+    //     //     Folders = mongoose.model("Folders", schema, "folders");
+    //     // }
+    //     if (!mongoose.models["folders"]) {
+    //         Folders = mongoose.model("folders", schema);
+    //     } else {
+    //         Folders = mongoose.models["folders"];
+    //     }
+
+    //     Folders.find({}).then(function (folders) {
+    //         res.json(folders);
+    //     });
+    // });
+
+    // router.get('/folders/:folderId', function (req, res, next) {
+    //     var schema = mongoose.Schema({
+    //         _id: mongoose.Types.ObjectId,
+    //         title: String,
+    //         key: String,
+    //         isRoot: Boolean,
+    //         isLeaf: Boolean,
+    //         parentId: mongoose.Types.ObjectId
+    //     });
+    //     var Folders;
+    //     // try {
+    //     //     Folders = mongoose.model.Folders;
+    //     // } catch (error) {
+    //     //     Folders = mongoose.model("Folders", schema, "folders");
+    //     // }
+    //     if (!mongoose.models["folders"]) {
+    //         Folders = mongoose.model("folders", schema);
+    //     } else {
+    //         Folders = mongoose.models["folders"];
+    //     }
+    //     Folders.find({ parentId: mongoose.Types.ObjectId(req.params.folderId) }).then(function (folders) {
+    //         res.json(folders);
+    //     });
+    // });
 
     return router;
 };

@@ -31,5 +31,10 @@ class TaskDataService {
   updateAction(time, name, action, number, numberLevel) {
     return http.put(`/task`, { time, name, action, number, numberLevel });
   }
+
+  run() {
+    return http.get(`/run`);
+  }
+  
 }
 export default new TaskDataService();

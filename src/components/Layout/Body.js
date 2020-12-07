@@ -27,13 +27,13 @@ class Body extends Component {
     }
 
     handleStart = async () => {
-        // this.setState({
-        //     openModal: true,
-        // });
-        // const run = await (await TaskDataService.run()).data;
-        // await this.setState({
-        //     runData: run,
-        // });
+        this.setState({
+            openModal: true,
+        });
+        const run = await (await TaskDataService.run()).data;
+        await this.setState({
+            runData: run,
+        });
     }
 
     handleMergeData = async () => {
@@ -46,8 +46,6 @@ class Body extends Component {
             }
         }
         const number = dataTripadvisor.length;
-        // const data = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
-        // this.setState({data});
         return window.alert(`Crawl thành công, dữ liệu hiện tại có ${number} bản ghi`);
     }
 

@@ -20,6 +20,21 @@ exports.factory = function (_, util, Tripadvisorhanoi) {
     });
   };
 
+  const getDataByName = (req, res, next) => {
+    // const name = req.params.name;
+    const name = 'Dal Vostro Hotel & Spa';
+    Tripadvisorhanoi.find({name: name}, function (err, tripadvisorhanoi) {
+        if (err) {
+            console.error(err);
+            res.status(404).send({
+                errors: [err.message],
+            });
+            return;
+        }
+        res.json({ tripadvisorhanoi });
+    });
+};
+
   const updateDataHotel = (req, res, next) => {
     const { name, roomtype, comment} = _.get(req, "body", "");
     
@@ -43,6 +58,7 @@ exports.factory = function (_, util, Tripadvisorhanoi) {
 
   return {
     getAll,
+    getDataByName,
     updateDataHotel,
   };
 

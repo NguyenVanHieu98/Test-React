@@ -4,6 +4,8 @@ import { Button, Row, Col } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
 import TripadvisorDataService from "../../services/tripadvisorhanoi";
 import MenuAction from "./MenuAction";
+import Slidebar from "./Slidebar";
+import Footer from "./Footer";
 
 class DataProcessing extends Component {
     constructor(props) {
@@ -39,6 +41,7 @@ class DataProcessing extends Component {
     render() {
         const { data } = this.state;
         return (<>
+            <Slidebar/>
             <div className="menubar">
                 <MenuAction />
             </div>
@@ -74,6 +77,7 @@ class DataProcessing extends Component {
                     </tbody>
                 </Table>
             </div>
+            <Footer/>
             </>
         );
     }
