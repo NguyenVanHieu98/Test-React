@@ -8,6 +8,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import AdminPage from './components/AdminPage/AdminPage';
 import DataProcessing from './components/Layout/DataProcessing';
 import ViewPage from './components/User/ViewPage';
+import ViewAllHotel from "./components/User/ViewAllHotel";
+
 class App extends Component {
 
   handleExtendEvent = (check) => {
@@ -29,7 +31,8 @@ class App extends Component {
           <Route path="/verify/:shareID" component={verifyPage} />
           <Route path="/showNote/:shareID" component={ShowNote} />
           <Route path="/data-processing" exact component={DataProcessing} />
-          <Route path="/user" exact component={ViewPage} />
+          <Route path="/detail/:hotelName" exact component={ViewPage} />
+          <Route path="/user" exact component={ViewAllHotel} />
           <Route component={Default} />
         </Switch>
       </BrowserRouter>

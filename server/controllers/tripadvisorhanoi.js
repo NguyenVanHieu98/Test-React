@@ -21,8 +21,8 @@ exports.factory = function (_, util, Tripadvisorhanoi) {
   };
 
   const getDataByName = (req, res, next) => {
-    // const name = req.params.name;
-    const name = 'Dal Vostro Hotel & Spa';
+    const name  = req.params.name;
+    // const name = 'Dal Vostro Hotel & Spa';
     Tripadvisorhanoi.find({name: name}, function (err, tripadvisorhanoi) {
         if (err) {
             console.error(err);

@@ -1,11 +1,126 @@
 .img {
     display: flex;
-    margin: 30px;
-    width: 30%;
-    height: 20%;
+    margin-left: 200px;
+    width: 75%;
+    height: 300px;
 }
 
 .name {
+    text-align: center;
+}
+
+.icon_place {
     display: flex;
-    padding: 15px;
+    margin-left: 450px;
+    margin-right: 10px;
+    height: 20px;
+}
+
+.place {
+    display: flex;
+    align-items: center;
+}
+
+.review{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.hotel_title {
+    background-color: rgb(247, 230, 155);
+}
+
+.hotel_convenient {
+    /* margin-bottom: 30px; */
+    background-color: aqua;
+}
+
+.hotel_roomtype {
+    /* margin-bottom: 30px; */
+    background-color: rgb(245, 178, 225);
+}
+
+.hotel_comment {
+    margin-bottom: 30px;
+    background-color: rgb(149, 129, 218);
+}
+
+.convenient_container {
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.comment_container {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.convenient {
+    margin-left: 70px;
+    margin-bottom: 10px;
+    flex-basis: 15%;
+}
+
+.roomtype {
+    margin-left: 70px;
+    margin-bottom: 10px;
+    flex-basis: 25%;
+}
+
+.comment {
+    margin-bottom: 10px;
+    margin-left: 70px;
+}
+
+.choose_hotel {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+}
+
+.modal {
+    position: absolute;
+    padding-top: 100px;
+}
+
+.hotel_container {
+    display: flex;
+    border: 1px solid white;
+    height: 200px;
+    margin: 20px;
+    position: relative;
+    background-color: rgb(247, 230, 155);
+}
+
+.hotel_name {
+    margin: 10px 0 10px 40px;
+    font-size: 24px;
+}
+
+.icon {
+    margin-left: 40px;
+    margin-right: 10px;
+    height: 20px;
+}
+
+.hotel_place {
+    display: flex;
+    margin-right: 50px;
+}
+
+.hotel_img {
+    display: flex;
+    height: 198px;
+    width: 500px;
+}
+
+.title {
+    background-color: rgb(247, 230, 155);
+    width: 600px;
+}
+
+.other_data {
+    margin: 20px 0 20px 35px;
 }

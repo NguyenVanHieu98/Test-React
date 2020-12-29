@@ -58,7 +58,7 @@ exports.factory = function (express,
     router.get("/hotels", bookinghanoiController.getAll);
 
     router.get("/tripadvisorhotels", tripadvisorhanoiController.getAll);
-    router.get("/datahotel", tripadvisorhanoiController.getDataByName);
+    router.get("/datahotel/:name", tripadvisorhanoiController.getDataByName);
     router.put("/updatedatas", tripadvisorhanoiController.updateDataHotel);
 
 

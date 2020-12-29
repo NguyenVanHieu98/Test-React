@@ -5,8 +5,8 @@ class TripadvisorataService {
     return http.get(`/tripadvisorhotels`);
   }
 
-  getDataByName() {
-    return http.get(`/datahotel`);
+  getDataByName( name ) {
+    return http.get(`/datahotel/${name}`);
   }
 
   updateDataHotel( name, roomtype, comment ) {
