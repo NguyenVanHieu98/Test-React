@@ -9,7 +9,8 @@ exports.requires = ["@express",
 "controllers.group", 
 "controllers.task",
 "controllers.bookinghanoi",
-"controllers.tripadvisorhanoi"];
+"controllers.tripadvisorhanoi",
+"controllers.bill"];
 
 exports.factory = function (express, 
     folderController, 
@@ -18,7 +19,8 @@ exports.factory = function (express,
     groupController, 
     taskController,
     bookinghanoiController,
-    tripadvisorhanoiController) {
+    tripadvisorhanoiController,
+    billController) {
     let router = express.Router();
 
     router.get("/folders", folderController.getFolders);
@@ -59,8 +61,14 @@ exports.factory = function (express,
 
     router.get("/tripadvisorhotels", tripadvisorhanoiController.getAll);
     router.get("/datahotel/:name", tripadvisorhanoiController.getDataByName);
+    router.get("/listhotels/:name", tripadvisorhanoiController.getDataLikeName);
     router.put("/updatedatas", tripadvisorhanoiController.updateDataHotel);
 
+    router.post("/bill", billController.newBill);
+    router.get("/bills", billController.getAll);
+    router.get("/bill/:email", billController.getBillByUser);
+    router.put("/bill", billController.updateBill);
+    router.delete("/bill/:billId", billController.deleteBill);
 
     // router.get('/folders', function (req, res, next) {
     //     var schema = mongoose.Schema({

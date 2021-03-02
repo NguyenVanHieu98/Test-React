@@ -1,6 +1,6 @@
 import http from "../http-common";
 
-class TripadvisorataService {
+class TripadvisorDataService {
   getAll() {
     return http.get(`/tripadvisorhotels`);
   }
@@ -9,9 +9,13 @@ class TripadvisorataService {
     return http.get(`/datahotel/${name}`);
   }
 
+  getDataLikeName( name ) {
+    return http.get(`/listhotels/${name}`);
+  }
+
   updateDataHotel( name, roomtype, comment ) {
     return http.put(`/updatedatas`, { name, roomtype, comment });
   }
 
 }
-export default new TripadvisorataService();
+export default new TripadvisorDataService();

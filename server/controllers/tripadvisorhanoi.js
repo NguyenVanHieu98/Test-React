@@ -1,5 +1,6 @@
 "use strict";
 exports.name = "controllers.tripadvisorhanoi";
+const escapeStringRegexp = require('escape-string-regexp');
 
 exports.requires = ["@lodash", "@util", "models.tripadvisorhanoi"];
 
@@ -35,6 +36,23 @@ exports.factory = function (_, util, Tripadvisorhanoi) {
     });
 };
 
+const getDataLikeName = (req, res, next) => {
+  const name  = req.params.name;
+  const $regex = escapeStringRegexp(name);
+
+  // const name = 'Dal Vostro Hotel & Spa';
+  Tripadvisorhanoi.find({name: {$regex}}, function (err, tripadvisorhanoi) {
+      if (err) {
+          console.error(err);
+          res.status(404).send({
+              errors: [err.message],
+          });
+          return;
+      }
+      res.json({ tripadvisorhanoi });
+  });
+};
+
   const updateDataHotel = (req, res, next) => {
     const { name, roomtype, comment} = _.get(req, "body", "");
     
@@ -60,6 +78,7 @@ exports.factory = function (_, util, Tripadvisorhanoi) {
     getAll,
     getDataByName,
     updateDataHotel,
+    getDataLikeName
   };
 
 };

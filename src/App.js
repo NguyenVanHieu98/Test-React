@@ -9,6 +9,7 @@ import AdminPage from './components/AdminPage/AdminPage';
 import DataProcessing from './components/Layout/DataProcessing';
 import ViewPage from './components/User/ViewPage';
 import ViewAllHotel from "./components/User/ViewAllHotel";
+import Profile from "./components/User/Profile";
 
 class App extends Component {
 
@@ -33,6 +34,8 @@ class App extends Component {
           <Route path="/data-processing" exact component={DataProcessing} />
           <Route path="/detail/:hotelName" exact component={ViewPage} />
           <Route path="/user" exact component={ViewAllHotel} />
+          <Route path="/user/:hotelName" exact component={ViewAllHotel} />
+          <Route path="/profile" exact component={Profile} />
           <Route component={Default} />
         </Switch>
       </BrowserRouter>

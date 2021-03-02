@@ -42,6 +42,11 @@ class ViewPage extends Component {
         this.setState({ openModal: true });
     }
 
+    convertPlace = (str) => {
+        str = str.split(' 100000').join(',');
+        return str.split(' 10000').join(',');
+    };
+
     render() {
         const { data, openModal } = this.state;
         return (<>
@@ -54,7 +59,7 @@ class ViewPage extends Component {
                 <h2 className="name">{data.name}</h2>
                 <div className="place">
                     <img className="icon_place" src={PlaceIcon} />
-                    <span>{data.place}</span>
+                    <span>{data.place && this.convertPlace(data.place)}</span>
                 </div>
                 <img className="img" src={data.img} />
                 <div className="review">

@@ -43,7 +43,7 @@ class DataProcessing extends Component {
         return (<>
             <Slidebar/>
             <div className="menubar">
-                <MenuAction />
+                <MenuAction setData={(newData) => this.setState({ data: newData })}/>
             </div>
             <div>
                 <Table>

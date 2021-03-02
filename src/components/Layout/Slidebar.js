@@ -9,13 +9,7 @@ class Slidebar extends Component {
             <div className="slidebar">
                 <Nav>
                     <Nav.Item>
-                        <Nav.Link href="/">Home</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link href="/">Account Management</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link href="/crawl-data">Crawl Data</Nav.Link>
+                        <Nav.Link href="/">Crawl Data</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link href="/data-processing">Data Processing</Nav.Link>
