@@ -6,7 +6,18 @@ import TaskDataService from "../../services/task.service";
 import BookingDataService from "../../services/bookinghanoi";
 import TripadvisorDataService from "../../services/tripadvisorhanoi";
 import RunningModal from "../Modal/RunningModal";
+import Checkbox from './Checkbox';
 
+const items = [
+    'Name',
+    'District',
+    'Place',
+    'Image',
+    'Review',
+    'Convenient',
+    'Roomtype',
+    'Comment'
+];
 class Body extends Component {
     constructor(props) {
         super(props);
@@ -16,9 +27,13 @@ class Body extends Component {
         }
     }
 
+    componentWillMount = () => {
+        this.selectedCheckboxes = new Set();
+    }
+
     componentDidUpdate() {
         if (this.state.runData !== '1') {
-            this.handleMergeData();
+            this.setDataDraft();
             this.setState({
                 openModal: false,
                 runData: '1',
@@ -49,6 +64,34 @@ class Body extends Component {
         return window.alert(`Crawl thành công, dữ liệu hiện tại có ${number} bản ghi`);
     }
 
+    toggleCheckbox = label => {
+        if (this.selectedCheckboxes.has(label)) {
+            this.selectedCheckboxes.delete(label);
+        } else {
+            this.selectedCheckboxes.add(label);
+        }
+    }
+
+    handleFormSubmit = formSubmitEvent => {
+        formSubmitEvent.preventDefault();
+
+        for (const checkbox of this.selectedCheckboxes) {
+            console.log(checkbox, 'is selected.');
+        }
+    }
+
+    createCheckbox = label => (
+        <Checkbox
+            label={label}
+            handleCheckboxChange={this.toggleCheckbox}
+            key={label}
+        />
+    )
+
+    createCheckboxes = () => (
+        items.map(this.createCheckbox)
+    )
+
     render() {
         const { openModal } = this.state;
         return (
@@ -56,15 +99,22 @@ class Body extends Component {
                 <RunningModal
                     showModal={openModal}
                 />
-                <Form inline className="form" >
-                    <Form.Label className="form-label">Select website to crawl: </Form.Label>
+                <Form className="form" >
+                    <Form.Label className="form-label">Lựa chọn trang web để thu thập dữ liệu: </Form.Label>
                     <Form.Control as="select" id="cityName" className="form-control">
                         <option>tripadvisor.com.vn</option>
                         <option>booking.com</option>
                         <option>ivivu.com</option>
                         <option>agoda.com</option>
                     </Form.Control>
-                    <Button variant="primary" className="button-start" onClick={this.handleStart}>Start</Button>
+                    <Form.Label className="form-label">Các tiêu chí muốn thu thập: </Form.Label>
+                    <div className="col-sm-12">
+                        <form onSubmit={this.handleStart}>
+                            {this.createCheckboxes()}
+                            <Button variant="primary" className="button-start" type="submit">Start</Button>
+                        </form>
+                    </div>
+                    {/* <Button variant="primary" className="button-start" onClick={this.handleStart}>Start</Button> */}
                 </Form>
             </div>
         );
