@@ -24,6 +24,7 @@ class Body extends Component {
         this.state = {
             openModal: false,
             runData: '1',
+            cityName: ''
         }
     }
 
@@ -41,13 +42,25 @@ class Body extends Component {
         }
     }
 
+    setDataDraft = async () => {
+        console.log(document.getElementById('cityName').value);
+    }
+
     handleStart = async () => {
+        let run;
         this.setState({
             openModal: true,
         });
-        const run = await (await TaskDataService.run()).data;
+        const cityName = document.getElementById('cityName').value;
+        if (cityName === 'tripadvisor.com.vn'){
+            run = await (await TripadvisorDataService.run()).data;
+        } else if (cityName === 'booking.com'){
+            run = await (await BookingDataService.run()).data;
+        }
+        // const run = await (await TaskDataService.run()).data;
         await this.setState({
             runData: run,
+            cityName
         });
     }
 
@@ -111,10 +124,10 @@ class Body extends Component {
                     <div className="col-sm-12">
                         <form onSubmit={this.handleStart}>
                             {this.createCheckboxes()}
-                            <Button variant="primary" className="button-start" type="submit">Start</Button>
+                            {/* <Button variant="primary" className="button-start" type="submit">Start</Button> */}
                         </form>
                     </div>
-                    {/* <Button variant="primary" className="button-start" onClick={this.handleStart}>Start</Button> */}
+                    <Button variant="primary" className="button-start" onClick={this.handleStart}>Start</Button>
                 </Form>
             </div>
         );
