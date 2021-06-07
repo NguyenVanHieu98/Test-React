@@ -62,7 +62,7 @@ const getDataLikeName = (req, res, next) => {
       .then((data) => {
         if (!data) {
           res.status(404).send({
-            errors: [err.message],
+            errors: "Có lỗi xảy ra!",
           });
         } else res.send({ message: "Successfully." });
       })
@@ -73,12 +73,30 @@ const getDataLikeName = (req, res, next) => {
       });
   }
 
+  const tripadvisorCrawl = (req, res, next) => {
+    const exec = util.promisify(require('child_process').exec);
+    async function lsWithGrep() {
+      try {
+        console.log('Crawling In Tripadvisor Hanoi');
+        const { stdout, stderr } = await exec('command/tripadvisorhanoi');
+        console.log(stdout);
+        console.log(stderr);
+        console.log('Done');
+        res.send({ message: "Successfully." })
+      }catch (err) {
+         console.error(err);
+      };
+    };
+    lsWithGrep();
+  }
+
 
   return {
     getAll,
     getDataByName,
     updateDataHotel,
-    getDataLikeName
+    getDataLikeName, 
+    tripadvisorCrawl,
   };
 
 };

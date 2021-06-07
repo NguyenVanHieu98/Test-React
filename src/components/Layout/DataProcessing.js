@@ -3,6 +3,7 @@ import { setStateAsync } from "../../helper";
 import { Button, Row, Col } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
 import TripadvisorDataService from "../../services/tripadvisorhanoi";
+import MyAppService from "../../services/myApp.service";
 import MenuAction from "./MenuAction";
 import Slidebar from "./Slidebar";
 import Footer from "./Footer";
@@ -25,7 +26,7 @@ class DataProcessing extends Component {
     // }
 
     fetchInitData = async () => {
-        const data = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
+        const data = await (await MyAppService.getAll()).data.myapp;
         console.log(data);
         this.setState({data});
     }
@@ -55,7 +56,7 @@ class DataProcessing extends Component {
                             <th>Convenient</th>
                             <th>Room type</th>
                             <th>Comment</th>
-                            <th>Price</th>
+                            {/* <th>Price</th> */}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -65,10 +66,10 @@ class DataProcessing extends Component {
                                 <td>{data.name}</td>
                                 <td>{data.district}</td>
                                 <td>{data.place}</td>
-                                <td>{data.convenient.length}</td>
-                                <td>{data.roomtype.length}</td>
-                                <td>{data.comment.length + 32}</td>
-                                <td>1234567 VND</td>
+                                <td>{data.convenient ? data.convenient.length : ''}</td>
+                                <td>{data.roomtype ? data.roomtype.length : ''}</td>
+                                <td>{data.comment ? data.comment.length : ''}</td>
+                                {/* <td>1234567 VND</td> */}
                                 <td><input type="checkbox" onChange={(e) => this.handleInputChange(e, data._id)}/>
                                 <Button variant="secondary" size="sm" >Delete</Button>
                                 </td>

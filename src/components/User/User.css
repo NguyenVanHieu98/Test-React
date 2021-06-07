@@ -1,8 +1,8 @@
 .img {
     display: flex;
-    margin-left: 200px;
-    width: 75%;
-    height: 300px;
+    margin-left: 70px;
+    width: 90%;
+    height: 500px;
 }
 
 .name {
@@ -27,22 +27,23 @@
 }
 
 .hotel_title {
-    background-color: rgb(247, 230, 155);
+    margin-top: 20px;
+    /* background-color: rgb(247, 230, 155); */
 }
 
 .hotel_convenient {
     /* margin-bottom: 30px; */
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 .hotel_roomtype {
     /* margin-bottom: 30px; */
-    background-color: rgb(245, 178, 225);
+    /* background-color: rgb(245, 178, 225); */
 }
-
+ 
 .hotel_comment {
     margin-bottom: 30px;
-    background-color: rgb(149, 129, 218);
+    /* background-color: rgb(149, 129, 218); */
 }
 
 .convenient_container {
@@ -55,6 +56,8 @@
 .comment_container {
     margin-left: 50px;
     margin-right: 50px;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .convenient {
@@ -123,4 +126,12 @@
 
 .other_data {
     margin: 20px 0 20px 35px;
+}
+
+.pull_right {
+    float: right !important;
+}
+
+.form_control {
+    padding-bottom: 20px;
 }

@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import "./Layout.css";
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import TaskDataService from "../../services/task.service";
+// import TaskDataService from "../../services/task.service";
 import BookingDataService from "../../services/bookinghanoi";
 import TripadvisorDataService from "../../services/tripadvisorhanoi";
+import MyAppService from "../../services/myApp.service";
 import RunningModal from "../Modal/RunningModal";
 import Checkbox from './Checkbox';
 
@@ -34,7 +35,7 @@ class Body extends Component {
 
     componentDidUpdate() {
         if (this.state.runData !== '1') {
-            this.setDataDraft();
+            this.setData();
             this.setState({
                 openModal: false,
                 runData: '1',
@@ -42,8 +43,85 @@ class Body extends Component {
         }
     }
 
-    setDataDraft = async () => {
-        console.log(document.getElementById('cityName').value);
+    setData = async () => {
+        let selectData = [];
+        let data;
+        let dataMyApp = await (await MyAppService.getAll()).data.myapp;
+        let listName = dataMyApp.map(dataMyApp => dataMyApp.name);
+        if (this.state.cityName === 'tripadvisor.com.vn') {
+            data = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
+        } else if (this.state.cityName === 'booking.com') {
+            data = await (await BookingDataService.getAll()).data.bookinghanoi;
+        }
+        for (var i = 0; i < data.length; i++) {
+            for (const checkbox of this.selectedCheckboxes) {
+                selectData.push(checkbox);
+            }
+            const myData = await (await MyAppService.getDataByName(data[i].name)).data.myapp[0];
+            console.log(myData);
+            if (!selectData.includes('District')) {
+                if (myData.district !== undefined) {
+                    data[i].district = myData.district;
+                } else {
+                    data[i].district = null;
+                }
+            }
+            if (!selectData.includes('Place')) {
+                if (myData.place !== undefined) {
+                    data[i].place = myData.place;
+                } else {
+                    data[i].place = null;
+                }
+            }
+            if (!selectData.includes('Image')) {
+                data[i].img = [];
+            }
+            if (!selectData.includes('Review')) {
+                data[i].review = [];
+            }
+            if (!selectData.includes('Convenient')) {
+                data[i].convenient = [];
+            }
+            if (!selectData.includes('Roomtype')) {
+                data[i].roomtype = [];
+            }
+            if (!selectData.includes('Comment')) {
+                data[i].comment = [];
+            } else {
+                for(var k = 0; k < data[i].comment.length; k++) {
+                    data[i].comment[k] += '  ' + this.state.cityName
+                }
+                for (var j = 0; j < data[i].comment.length; j++) {
+                    if (myData && myData.comment.includes(data[i].comment[j])) {
+                        delete data[i].comment[j];  
+                    }
+                }
+                console.log(data[i].comment);
+            }
+            if (listName.includes(data[i].name)) {
+                await MyAppService.updateMyData(
+                    data[i].name, 
+                    data[i].district, 
+                    data[i].place, 
+                    data[i].img, 
+                    data[i].review, 
+                    data[i].convenient, 
+                    data[i].roomtype, 
+                    data[i].comment
+                ); 
+            } else {
+                await MyAppService.createData(
+                    data[i].name, 
+                    data[i].district, 
+                    data[i].place,
+                    data[i].img,
+                    data[i].review,
+                    data[i].convenient,
+                    data[i].roomtype,
+                    data[i].comment
+                );
+            }
+        }
     }
 
     handleStart = async () => {
@@ -53,9 +131,9 @@ class Body extends Component {
         });
         const cityName = document.getElementById('cityName').value;
         if (cityName === 'tripadvisor.com.vn'){
-            run = await (await TripadvisorDataService.run()).data;
+            run = await (await TripadvisorDataService.tripadvisorCrawl()).data;
         } else if (cityName === 'booking.com'){
-            run = await (await BookingDataService.run()).data;
+            run = await (await BookingDataService.bookingCrawl()).data;
         }
         // const run = await (await TaskDataService.run()).data;
         await this.setState({
@@ -64,18 +142,18 @@ class Body extends Component {
         });
     }
 
-    handleMergeData = async () => {
-        const dataBooking = await (await BookingDataService.getAll()).data.bookinghanoi;
-        const dataTripadvisor = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
-        const listName = dataTripadvisor.map(dataTripadvisor => dataTripadvisor.name);
-        for (var i = 0; i < dataBooking.length; i++) {
-            if (listName.includes(dataBooking[i].name)) {
-                await TripadvisorDataService.updateDataHotel(dataBooking[i].name, dataBooking[i].roomtype, dataBooking[i].comment);
-            }
-        }
-        const number = dataTripadvisor.length;
-        return window.alert(`Crawl thành công, dữ liệu hiện tại có ${number} bản ghi`);
-    }
+    // handleMergeData = async () => {
+    //     const dataBooking = await (await BookingDataService.getAll()).data.bookinghanoi;
+    //     const dataTripadvisor = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
+    //     const listName = dataTripadvisor.map(dataTripadvisor => dataTripadvisor.name);
+    //     for (var i = 0; i < dataBooking.length; i++) {
+    //         if (listName.includes(dataBooking[i].name)) {
+    //             await TripadvisorDataService.updateDataHotel(dataBooking[i].name, dataBooking[i].roomtype, dataBooking[i].comment);
+    //         }
+    //     }
+    //     const number = dataTripadvisor.length;
+    //     return window.alert(`Crawl thành công, dữ liệu hiện tại có ${number} bản ghi`);
+    // }
 
     toggleCheckbox = label => {
         if (this.selectedCheckboxes.has(label)) {

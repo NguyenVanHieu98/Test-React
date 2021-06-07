@@ -17,6 +17,7 @@ import 'firebase/auth';
 import { auth } from "../../firebase";
 import { signInWithGoogle } from "../../firebase";
 import ListBill from './ListBill';
+import MyAppService from "../../services/myApp.service";
 
 class ViewAllHotel extends Component {
     constructor(props) {
@@ -33,12 +34,13 @@ class ViewAllHotel extends Component {
     }
 
     fetchInitData = async () => {
-        const data = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
+        const data = await (await MyAppService.getAll()).data.myapp;
         console.log(data);
         this.setState({ data });
     }
 
     convertPlace = (str) => {
+        if (str === null) return '';
         str = str.split(' 100000').join(',');
         return str.split(' 10000').join(',');
     };
@@ -48,9 +50,9 @@ class ViewAllHotel extends Component {
         this.props.history.push(`/user/${this.search.value}`);
         let data;
         if (this.search.value === "") {
-            data = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
+            data = await (await MyAppService.getAll()).data.myapp;
         } else {
-            data = await (await TripadvisorDataService.getDataLikeName(this.search.value)).data.tripadvisorhanoi;
+            data = await (await MyAppService.getDataLikeName(this.search.value)).data.myapp;
         }
         this.setState({ data });
     }
@@ -114,8 +116,8 @@ class ViewAllHotel extends Component {
                             <img className="icon" src={PlaceIcon} />
                             <span>{this.convertPlace(data.place)}</span>
                         </div>
-                        <div className="other_data">{data.comment.length + 10} lượt đánh giá</div>
-                        <div className="other_data">Giá tham khảo: Updating...</div>
+                        <div className="other_data">{data.comment ? data.comment.length : '0' } lượt đánh giá</div>
+                        {/* <div className="other_data">Giá tham khảo: Updating...</div> */}
                     </div>
                     <div style={{ marginLeft: '150px' }}>
                         <img className="hotel_img" src={data.img} />

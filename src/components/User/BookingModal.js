@@ -35,35 +35,43 @@ class BookingModal extends Component {
 					<div className="modal-form" >
 						<form className="form-custom">
 							<Modal.Header>
-								<Modal.Title className="modal-title">Vui lòng để lại thông tin liên hệ !</Modal.Title>
+								<Modal.Title>Vui lòng để lại thông tin liên hệ !</Modal.Title>
 							</Modal.Header>
 							<Modal.Body>
-							<Form inline>
-								<FormGroup>
+							<div class="row form_control">
+								<div class="col-lg-4">
 									<FormLabel className="modal-label">Họ tên:</FormLabel>
-									<FormControl id="name" value={users && users.displayName} placeholder="NGUYEN VAN A" />
-								</FormGroup>
-							</Form>
-                            <Form inline>
-								<FormGroup>
+								</div>
+								<div class="col-lg-8">
+									<FormControl id="name" value={users && users.displayName} class="pull-right"/>
+								</div>
+							</div>
+                            <div class="row form_control">
+								<div class="col-lg-4">
 									<FormLabel className="modal-label">Email:</FormLabel>
-									<FormControl id="email" value={users && users.email} type="email" />
-								</FormGroup>
-							</Form>
-                            <Form inline>
-								<FormGroup>
+								</div>
+								<div class="col-lg-8">
+									<FormControl id="email" value={users && users.email} type="email" class="pull-right"/>
+								</div>
+							</div>
+                            <div class="row form_control">
+								<div class="col-lg-4">
 									<FormLabel className="modal-label">Số điện thoại:</FormLabel>
-									<FormControl id="phone" value={users && users.phoneNumber} />
-								</FormGroup>
-							</Form>
-                            <Form inline>
-								<FormGroup>
+								</div>
+								<div class="col-lg-8">
+									<FormControl id="phone" value={users && users.phoneNumber} class="pull-right"/>
+								</div>
+							</div>
+                            <div class="row form_control">
+								<div class="col-lg-4">
 									<FormLabel className="modal-label">Loại phòng:</FormLabel>
-									<FormControl as="select" id="room" onChange={this.handleFolderChange}>
+								</div>
+								<div class="col-lg-8">
+									<FormControl as="select" id="room" onChange={this.handleFolderChange} class="pull-right">
                                         {data.roomtype && data.roomtype.map((roomtype, i) => <option value={(roomtype)} >{roomtype}</option>)}
                                     </FormControl>
-								</FormGroup>
-							</Form>
+								</div>
+							</div>
 							</Modal.Body>
 							<Modal.Footer>
 								<Button variant="primary" className="button-apply" onClick={this.handleSubmit}>OK</Button>

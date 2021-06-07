@@ -17,5 +17,9 @@ class TripadvisorDataService {
     return http.put(`/updatedatas`, { name, roomtype, comment });
   }
 
+  tripadvisorCrawl() {
+    return http.get(`/tripadvisorCrawl`);
+  }
+
 }
 export default new TripadvisorDataService();

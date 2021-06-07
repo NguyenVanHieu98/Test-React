@@ -5,5 +5,9 @@ class BookingDataService {
     return http.get(`/hotels`);
   }
 
+  bookingCrawl() {
+    return http.get(`/bookingCrawl`);
+  }
+
 }
 export default new BookingDataService();

@@ -20,9 +20,25 @@ exports.factory = function (_, util, Bookinghanoi) {
     });
   };
 
+  const bookingCrawl = (req, res, next) => {
+    const exec = util.promisify(require('child_process').exec);
+    async function lsWithGrep() {
+      try {
+        console.log('Crawling In Booking Hanoi');
+        await exec('command/bookinghanoi');
+        console.log('Done');
+        res.send({ message: "Successfully." })
+      }catch (err) {
+         console.error(err);
+      };
+    };
+    lsWithGrep();
+  }
+
 
   return {
     getAll,
+    bookingCrawl,
   };
 
 };

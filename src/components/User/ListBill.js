@@ -49,28 +49,33 @@ class ListBill extends Component {
                             <Modal.Title style={{ marginLeft: '180px' }}>LIST BILL</Modal.Title>
                         </Modal.Header>
                         <Modal.Body id="modal_body1">
-                            <Table>
-                              <thead>
-                                <tr>
-                                    <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th>Hotel</th>
-                                    <th>Room</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                    {bills && bills.map((bill) => (
-                                    <tr>
-                                        <td>{bill.email}</td>
-                                        <td>{bill.phone}</td>
-                                        <td>{bill.hotel}</td>
-                                        <td>{bill.room}</td>
-                                        <td><Button variant="secondary" size="sm" 
-                                            onClick={(e) => this.deleteBill(bill._id, e)}>Hủy phòng</Button></td>
-                                    </tr>  
-                                    ))}
-                              </tbody>
-                            </Table>
+                            {bills.length > 0 ? (
+                                    <Table>
+                                        <thead>
+                                            <tr>
+                                                <th>Email</th>
+                                                <th>Phone Number</th>
+                                                <th>Hotel</th>
+                                                <th>Room</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {bills && bills.map((bill) => (
+                                            <tr>
+                                                <td>{bill.email}</td>
+                                                <td>{bill.phone}</td>
+                                                <td>{bill.hotel}</td>
+                                                <td>{bill.room}</td>
+                                                <td><Button variant="secondary" size="sm" 
+                                                    onClick={(e) => this.deleteBill(bill._id, e)}>Hủy phòng</Button></td>
+                                            </tr>  
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                ) : (
+                                    "Khong co lich su dat phong"
+                            )
+                            }                         
                         </Modal.Body>
                         <Modal.Footer id="modal_footer">
                             <Button variant="danger" onClick={() => handleClose()}>

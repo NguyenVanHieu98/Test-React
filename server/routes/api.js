@@ -10,6 +10,7 @@ exports.requires = ["@express",
 "controllers.task",
 "controllers.bookinghanoi",
 "controllers.tripadvisorhanoi",
+"controllers.myapp",
 "controllers.bill"];
 
 exports.factory = function (express, 
@@ -20,6 +21,7 @@ exports.factory = function (express,
     taskController,
     bookinghanoiController,
     tripadvisorhanoiController,
+    myappController,
     billController) {
     let router = express.Router();
 
@@ -58,11 +60,20 @@ exports.factory = function (express,
     router.get("/run", taskController.run);
 
     router.get("/hotels", bookinghanoiController.getAll);
+    router.get("/bookingCrawl", bookinghanoiController.bookingCrawl);
 
     router.get("/tripadvisorhotels", tripadvisorhanoiController.getAll);
     router.get("/datahotel/:name", tripadvisorhanoiController.getDataByName);
     router.get("/listhotels/:name", tripadvisorhanoiController.getDataLikeName);
     router.put("/updatedatas", tripadvisorhanoiController.updateDataHotel);
+    router.get("/tripadvisorCrawl", tripadvisorhanoiController.tripadvisorCrawl);
+
+    router.get("/myappgetall", myappController.getAll);
+    router.get("/myappgetbyname/:name", myappController.getDataByName);
+    router.get("/myappsearchbyname/:name", myappController.getDataLikeName);
+    router.put("/myappupdate", myappController.updateMyData);
+    router.post("/myappcreatedata", myappController.createData);
+
 
     router.post("/bill", billController.newBill);
     router.get("/bills", billController.getAll);

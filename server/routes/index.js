@@ -28,7 +28,7 @@ const cookieParser = require('cookie-parser');
 
 var auth = {
 	user: 'amazinghieu98@gmail.com', 		//change by your email
-	pass: 'HaXuyen20041998'            //change by your password
+	pass: '06032004TH'            //change by your password
 };
 
 var transporter = nodemailer.createTransport({
