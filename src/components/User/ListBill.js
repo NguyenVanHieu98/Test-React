@@ -73,7 +73,7 @@ class ListBill extends Component {
                                         </tbody>
                                     </Table>
                                 ) : (
-                                    "Khong co lich su dat phong"
+                                    ""
                             )
                             }                         
                         </Modal.Body>

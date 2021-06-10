@@ -36,8 +36,8 @@ class ViewPage extends Component {
 
     convertComment = (str) => {
         if (str === null) return '';
-        console.log(str.endsWith("booking.com"));
-        console.log(str.endsWith("tripadvisor.com.vn"));
+        // console.log(str.endsWith("booking.com"));
+        // console.log(str.endsWith("tripadvisor.com.vn"));
         str = str.split('“').join('');
         str = str.split('booking.com').join('');
         str = str.split('tripadvisor.com.vn').join('');
@@ -52,7 +52,15 @@ class ViewPage extends Component {
         if (str === null) return '';
         str = str.split(' 100000').join(',');
         return str.split(' 10000').join(',');
-    };
+    }
+
+    isString = (str) => {
+        console.log(str,str.indexOf("a") )
+        str = str.split('booking.com').join('');
+        str = str.split('tripadvisor.com.vn').join('');
+        if (str.indexOf("a") > 0 ) return true;
+        else return false;
+    }
 
     render() {
         const { data, openModal } = this.state;
@@ -93,7 +101,11 @@ class ViewPage extends Component {
             <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px'}}>Khách hàng nhận xét</h2>
                 <div className="comment_container">
                     {data.comment && data.comment.map((comment, i) =>
-                        <div className="comment" key={i}>+ {this.convertComment(comment)}</div>
+                        this.isString(comment) ? (
+                            <div className="col-lg-4 comment">
+                                <div key={i}>{this.convertComment(comment)}</div>
+                            </div>
+                        ) : null
                     )}
                 </div>
             </div>
