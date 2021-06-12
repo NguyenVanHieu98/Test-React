@@ -62,6 +62,11 @@ class ViewPage extends Component {
         else return false;
     }
 
+    webName = (str) => {
+        if (str.indexOf("booking.com") > 0 ) return 'Booking.com';
+        return 'Tripadvisor.com.vn'
+    }
+
     render() {
         const { data, openModal } = this.state;
         return (<>
@@ -82,7 +87,7 @@ class ViewPage extends Component {
                 </div>
             </div>
             <div className="hotel_convenient">
-                <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px'}}>Tiện nghi khách sạn</h2>
+                <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px', fontFamily: '"Old Standard TT", sans-serif'}}>Tiện nghi khách sạn</h2>
                 <div className="convenient_container">
                     {data.convenient && data.convenient.map((convenient, i) =>
                         <div className="convenient" key={i}>* {convenient}</div>
@@ -90,20 +95,23 @@ class ViewPage extends Component {
                 </div>
             </div>
             <div className="hotel_roomtype">
-            <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px'}}>Loại phòng phổ biến</h2>
+                <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px', fontFamily: '"Old Standard TT", sans-serif'}}>Loại phòng phổ biến</h2>
                 <div className="convenient_container">
                     {data.roomtype && data.roomtype.map((roomtype, i) =>
-                        <div className="roomtype" key={i}>* {roomtype}</div>
+                        <div className="col-lg-3 room_type_form">
+                            <div className="roomtype" key={i}>{roomtype}</div>
+                        </div>
                     )}
                 </div>
             </div>
             <div className="hotel_comment">
-            <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px'}}>Khách hàng nhận xét</h2>
+                <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px', fontFamily: '"Old Standard TT", sans-serif'}}>Khách hàng nhận xét</h2>
                 <div className="comment_container">
                     {data.comment && data.comment.map((comment, i) =>
                         this.isString(comment) ? (
-                            <div className="col-lg-4 comment">
-                                <div key={i}>{this.convertComment(comment)}</div>
+                            <div className="col-lg-3 comment_form">
+                                <div className="webName">{this.webName(comment)}</div>
+                                <div key={i} className="comment" id="style-scroll">{this.convertComment(comment)}</div>
                             </div>
                         ) : null
                     )}
