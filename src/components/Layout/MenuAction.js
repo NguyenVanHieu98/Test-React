@@ -3,7 +3,8 @@ import { Nav } from "react-bootstrap";
 import "./Layout.css";
 import Form from 'react-bootstrap/Form';
 import ListBill from './ListBill';
-import TripadvisorDataService from "../../services/tripadvisorhanoi";
+import History from './History';
+import TripadvisorDataService from "../../services/tripadvisor";
 
 class MenuAction extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class MenuAction extends Component {
         this.state = {
             data: [],
             showBill: false,
+            showHistory: false
         };
     }
 
@@ -20,26 +22,36 @@ class MenuAction extends Component {
         })
     }
 
+    handleShowHistory = () => {
+        this.setState({
+            showHistory: true,
+        })
+    }
+
     handleInputChange = async (e) => {
         e.preventDefault();
         const { setData } = this.props;
         let data;
         if(this.search.value === "") {
-            data = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
+            data = await (await TripadvisorDataService.getAll()).data.tripadvisor;
         } else {
-            data = await (await TripadvisorDataService.getDataLikeName(this.search.value)).data.tripadvisorhanoi; 
+            data = await (await TripadvisorDataService.getDataLikeName(this.search.value)).data.tripadvisor; 
         }
         setData(data);
     }
 
 
     render() {
-        const { showBill } = this.state;
+        const { showBill, showHistory } = this.state;
         return (
             <div className="menu-action">
                 <ListBill 
                     showBill={showBill}
                     handleClose={() => this.setState({ showBill: false })}                
+                />
+                <History
+                    showHistory={showHistory}
+                    handleClose={() => this.setState({ showHistory: false })}
                 />
                 <Nav>
                     <Nav.Item>
@@ -59,6 +71,9 @@ class MenuAction extends Component {
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link onClick={this.handleShowBill} style={{color: "red", marginLeft: '500px'}}>List Bill</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link onClick={this.handleShowHistory} style={{ color: "red", marginLeft: '50px' }}>History</Nav.Link>
                     </Nav.Item>
                 </Nav>
             </div>

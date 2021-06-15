@@ -7,7 +7,7 @@ import Table from 'react-bootstrap/Table';
 import firebase from 'firebase';
 require('firebase/auth');
 
-const url_getbill = "http://localhost:5000/api/bills/";
+const url_getbill = "http://localhost:5000/api/bills/0";
 
 class ListBill extends Component {
     constructor(props) {
@@ -39,7 +39,7 @@ class ListBill extends Component {
     {
         const isApply = window.confirm("Chấp nhận yêu cầu và gửi mail đến cho khách hàng ?");
         if (!isApply) return;
-        BillService.applyBill(id).then(
+        BillService.updateBill(id).then(
           (res) => this.componentDidMount(),
           (err) => console.log(err)
         );

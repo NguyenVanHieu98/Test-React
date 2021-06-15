@@ -1,4 +1,4 @@
-"use strict";
+
 exports.name = "controllers.bill";
 
 exports.requires = ["@lodash", "@util", "models.bill"];
@@ -23,7 +23,36 @@ exports.factory = function (_, util, Bill) {
 
     const getBillByUser = (req, res, next) => {
         const { email } = req.params.email;
-        Bill.find({email: 'amazinghieu98@gmail.com'}, function (err, bill) {
+        Bill.find({ email: email}, function (err, bill) {
+            if (err) {
+                console.error(err);
+                res.status(404).send({
+                    errors: [err.message],
+                });
+                return;
+            }
+            res.json({ bill });
+        });
+    };
+
+    const getBillByStatus = (req, res, next) => {
+        const { status } = req.params.status;
+        Bill.find({ status: status }, function (err, bill) {
+            if (err) {
+                console.error(err);
+                res.status(404).send({
+                    errors: [err.message],
+                });
+                return;
+            }
+            res.json({ bill });
+        });
+    };
+
+    const getBillByUserAndStatus = (req, res, next) => {
+        const { email } = req.params.email;
+        const { status } = req.params.status;
+        Bill.find({ email: email, status: status }, function (err, bill) {
             if (err) {
                 console.error(err);
                 res.status(404).send({
@@ -36,17 +65,14 @@ exports.factory = function (_, util, Bill) {
     };
 
     const updateBill = (req, res, next) => {
-        const { name, roomtype, comment } = _.get(req, "body", "");
-
-        // tasks.update({time: "0h"}, {$set: {"actionName.0": {name: "Te", action: "test", number: "0"}}})
-        // tasks.update({time: "0h"}, {$push: {"actionName.1.actions": {action: "test"}}})
-        Bill.update({ name: name }, { $push: { roomtype: roomtype, comment: comment } })
+        const id = req.params.billId;
+        Bill.findByIdAndUpdate(id, { status: 1 })
             .then((data) => {
                 if (!data) {
                     res.status(404).send({
-                        message: `Cannot update this Bill!`,
+                        message: `Cannot update Bill with id=${id}. Maybe Tutorial was not found!`,
                     });
-                } else res.send({ message: "Successfully." });
+                } else res.send({ message: "Bill was updated successfully." });
             })
             .catch((err) => {
                 res.status(500).send({
@@ -56,7 +82,7 @@ exports.factory = function (_, util, Bill) {
     };
 
     const newBill = (req, res, next) => {
-        const { name, email, phone, hotel, room } = _.get(req, "body", "");
+        const { name, email, phone, hotel, room, date, time } = _.get(req, "body", "");
 
         new Bill({
             name: name,
@@ -64,6 +90,8 @@ exports.factory = function (_, util, Bill) {
             phone: phone,
             hotel: hotel,
             room: room,
+            date: date,
+            time: time,
             status: 0,
         }).save(function (err, bill) {
             if (err) {
@@ -96,6 +124,8 @@ exports.factory = function (_, util, Bill) {
     return {
         getAll,
         getBillByUser,
+        getBillByStatus,
+        getBillByUserAndStatus,
         updateBill,
         newBill,
         deleteBill

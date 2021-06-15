@@ -10,12 +10,20 @@ class BillService {
         return http.get(`/bill/${email}`);
     }
 
-    updateBill(name, roomtype, comment) {
-        return http.put(`/bill`, { name, roomtype, comment });
+    getBillByStatus(status) {
+        return http.get(`/bill/${status}`);
     }
 
-    createBill(name, email, phone, hotel, room) {
-        return http.post(`/bill`, { name, email, phone, hotel, room });
+    getBillByUserAndStatus(email, status) {
+        return http.get(`/bill/${email}/${status}`);
+    }
+
+    updateBill(billId) {
+        return http.put(`/bill`, { billId });
+    }
+
+    createBill(name, email, phone, hotel, room, date, time) {
+        return http.post(`/bill`, { name, email, phone, hotel, room, date, time });
     }
 
     delete(billId) {

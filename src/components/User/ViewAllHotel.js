@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { setStateAsync } from "../../helper";
 import { Button, Row, Col } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
-import TripadvisorDataService from "../../services/tripadvisorhanoi";
+import TripadvisorDataService from "../../services/tripadvisor";
 // import MenuAction from "./MenuAction";
 // import Slidebar from "./Slidebar";
 import "./User.css";

@@ -17,8 +17,20 @@ class TripadvisorDataService {
     return http.put(`/updatedatas`, { name, roomtype, comment });
   }
 
-  tripadvisorCrawl() {
-    return http.get(`/tripadvisorCrawl`);
+  tripadvisorCrawlHanoi() {
+    return http.get(`/tripadvisorCrawlHanoi`);
+  }
+
+  tripadvisorCrawlHoChiMinh() {
+    return http.get(`/tripadvisorCrawlHoChiMinh`);
+  }
+
+  tripadvisorCrawlNhaTrang() {
+    return http.get(`/tripadvisorCrawlNhaTrang`);
+  }
+
+  tripadvisorCrawlDaLat() {
+    return http.get(`/tripadvisorCrawlDaLat`);
   }
 
 }

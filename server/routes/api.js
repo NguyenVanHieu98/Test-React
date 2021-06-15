@@ -1,4 +1,4 @@
-"use strict";
+
 
 exports.name = "routes.api";
 
@@ -8,8 +8,8 @@ exports.requires = ["@express",
 "controllers.share", 
 "controllers.group", 
 "controllers.task",
-"controllers.bookinghanoi",
-"controllers.tripadvisorhanoi",
+"controllers.booking",
+"controllers.tripadvisor",
 "controllers.myapp",
 "controllers.bill"];
 
@@ -19,8 +19,8 @@ exports.factory = function (express,
     shareController, 
     groupController, 
     taskController,
-    bookinghanoiController,
-    tripadvisorhanoiController,
+    bookingController,
+    tripadvisorController,
     myappController,
     billController) {
     let router = express.Router();
@@ -59,14 +59,22 @@ exports.factory = function (express,
 
     router.get("/run", taskController.run);
 
-    router.get("/hotels", bookinghanoiController.getAll);
-    router.get("/bookingCrawl", bookinghanoiController.bookingCrawl);
+    router.get("/hotels", bookingController.getAll);
+    router.get("/bookingCrawlHanoi", bookingController.bookingCrawlHanoi);
+    router.get("/bookingCrawlHoChiMinh", bookingController.bookingCrawlHoChiMinh);
+    router.get("/bookingCrawlNhaTrang", bookingController.bookingCrawlNhaTrang);
+    router.get("/bookingCrawlDaLat", bookingController.bookingCrawlDaLat);
 
-    router.get("/tripadvisorhotels", tripadvisorhanoiController.getAll);
-    router.get("/datahotel/:name", tripadvisorhanoiController.getDataByName);
-    router.get("/listhotels/:name", tripadvisorhanoiController.getDataLikeName);
-    router.put("/updatedatas", tripadvisorhanoiController.updateDataHotel);
-    router.get("/tripadvisorCrawl", tripadvisorhanoiController.tripadvisorCrawl);
+
+    router.get("/tripadvisorhotels", tripadvisorController.getAll);
+    router.get("/datahotel/:name", tripadvisorController.getDataByName);
+    router.get("/listhotels/:name", tripadvisorController.getDataLikeName);
+    router.put("/updatedatas", tripadvisorController.updateDataHotel);
+    router.get("/tripadvisorCrawlHanoi", tripadvisorController.tripadvisorCrawlHanoi);
+    router.get("/tripadvisorCrawlHoChiMinh", tripadvisorController.tripadvisorCrawlHoChiMinh);
+    router.get("/tripadvisorCrawlNhaTrang", tripadvisorController.tripadvisorCrawlNhaTrang);
+    router.get("/tripadvisorCrawlDaLat", tripadvisorController.tripadvisorCrawlDaLat);
+
 
     router.get("/myappgetall", myappController.getAll);
     router.get("/myappgetbyname/:name", myappController.getDataByName);
@@ -78,6 +86,8 @@ exports.factory = function (express,
     router.post("/bill", billController.newBill);
     router.get("/bills", billController.getAll);
     router.get("/bill/:email", billController.getBillByUser);
+    router.get("/bills/:status", billController.getBillByStatus);
+    router.get("/bills/:email/:status", billController.getBillByUserAndStatus);
     router.put("/bill", billController.updateBill);
     router.delete("/bill/:billId", billController.deleteBill);
 

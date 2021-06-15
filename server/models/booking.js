@@ -1,6 +1,6 @@
-'use strict';
 
-exports.name = 'models.tripadvisorhanoi';
+
+exports.name = 'models.booking';
 
 exports.requires = [
     '@mongoose'
@@ -9,7 +9,7 @@ exports.requires = [
 exports.factory = function (mongoose) {
 
     return mongoose.model(
-        "Tripadvisorhanoi",
+        "Booking",
         new mongoose.Schema({
             name: String,
             district: String,

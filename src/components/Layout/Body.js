@@ -3,8 +3,8 @@ import "./Layout.css";
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 // import TaskDataService from "../../services/task.service";
-import BookingDataService from "../../services/bookinghanoi";
-import TripadvisorDataService from "../../services/tripadvisorhanoi";
+import BookingDataService from "../../services/booking";
+import TripadvisorDataService from "../../services/tripadvisor";
 import MyAppService from "../../services/myApp.service";
 import RunningModal from "../Modal/RunningModal";
 import Checkbox from './Checkbox';
@@ -49,9 +49,9 @@ class Body extends Component {
         let dataMyApp = await (await MyAppService.getAll()).data.myapp;
         let listName = dataMyApp.map(dataMyApp => dataMyApp.name);
         if (this.state.webName === 'tripadvisor.com.vn') {
-            data = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
+            data = await (await TripadvisorDataService.getAll()).data.tripadvisor;
         } else if (this.state.webName === 'booking.com') {
-            data = await (await BookingDataService.getAll()).data.bookinghanoi;
+            data = await (await BookingDataService.getAll()).data.booking;
         }
         for (var i = 0; i < data.length; i++) {
             for (const checkbox of this.selectedCheckboxes) {
@@ -130,10 +130,33 @@ class Body extends Component {
             openModal: true,
         });
         const webName = document.getElementById('webName').value;
+        const cityName = document.getElementById('cityName').value;
         if (webName === 'tripadvisor.com.vn'){
-            run = await (await TripadvisorDataService.tripadvisorCrawl()).data;
+            if (cityName === 'Hà Nội'){
+                run = await (await TripadvisorDataService.tripadvisorCrawlHanoi()).data;
+            }
+            else if (cityName === 'Thành phố Hồ Chí Minh'){
+                run = await (await TripadvisorDataService.tripadvisorCrawlHoChiMinh()).data;
+            }
+            else if (cityName === 'Nha Trang') {
+                run = await (await TripadvisorDataService.tripadvisorCrawlNhaTrang()).data;
+            }
+            else if (cityName === 'Đà Lạt') {
+                run = await (await TripadvisorDataService.tripadvisorCrawlDaLat()).data;
+            }
         } else if (webName === 'booking.com'){
-            run = await (await BookingDataService.bookingCrawl()).data;
+            if (cityName === 'Hà Nội') {
+                run = await (await BookingDataService.bookingCrawlHanoi()).data;
+            }
+            else if (cityName === 'Thành phố Hồ Chí Minh') {
+                run = await (await BookingDataService.bookingCrawlHoChiMinh()).data;
+            }
+            else if (cityName === 'Nha Trang') {
+                run = await (await BookingDataService.bookingCrawlNhaTrang()).data;
+            }
+            else if (cityName === 'Đà Lạt') {
+                run = await (await BookingDataService.bookingCrawlDaLat()).data;
+            }
         }
         // const run = await (await TaskDataService.run()).data;
         await this.setState({
@@ -201,10 +224,10 @@ class Body extends Component {
                         <option>booking.com</option>
                     </Form.Control>
                     <Form.Control as="select" id="cityName" className="form-control">
-                        <option>Ha Noi</option>
-                        <option>Thanh pho Ho Chi Minh</option>
-                        <option>Da Nang</option>
-                        <option>Can Tho</option>
+                        <option>Hà Nội</option>
+                        <option>Thành phố Hồ Chí Minh</option>
+                        <option>Nha Trang</option>
+                        <option>Đà Lạt</option>
                     </Form.Control>
                 </Form>
                 <Form>

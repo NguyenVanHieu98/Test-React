@@ -1,4 +1,4 @@
-'use strict';
+
 
 exports.name = 'models.bill';
 
@@ -16,6 +16,8 @@ exports.factory = function (mongoose) {
             phone: String,
             hotel: String,
             room: String,
+            date: String,
+            time: String,
             status: Number,
         })
     );

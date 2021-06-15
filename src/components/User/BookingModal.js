@@ -21,7 +21,10 @@ class BookingModal extends Component {
         const phone = document.getElementById('phone').value;
         const hotel = data.name;
 		const room = document.getElementById('room').value;
-		await BillService.createBill(name, email, phone, hotel, room); 
+		const dateTime = document.getElementById('time').value.split('T', 2);
+		const date = dateTime[0];
+		const time = dateTime[1];
+		await BillService.createBill(name, email, phone, hotel, room, date, time); 
 		this.props.handleClose();
 	}
 
@@ -38,40 +41,48 @@ class BookingModal extends Component {
 								<Modal.Title>Vui lòng để lại thông tin liên hệ !</Modal.Title>
 							</Modal.Header>
 							<Modal.Body>
-							<div class="row form_control">
-								<div class="col-lg-4">
-									<FormLabel className="modal-label">Họ tên:</FormLabel>
+								<div class="row form_control">
+									<div class="col-lg-4">
+										<FormLabel className="modal-label">Họ tên:</FormLabel>
+									</div>
+									<div class="col-lg-8">
+										<FormControl id="name" value={users && users.displayName} class="pull-right"/>
+									</div>
 								</div>
-								<div class="col-lg-8">
-									<FormControl id="name" value={users && users.displayName} class="pull-right"/>
+								<div class="row form_control">
+									<div class="col-lg-4">
+										<FormLabel className="modal-label">Email:</FormLabel>
+									</div>
+									<div class="col-lg-8">
+										<FormControl id="email" value={users && users.email} type="email" class="pull-right"/>
+									</div>
 								</div>
-							</div>
-                            <div class="row form_control">
-								<div class="col-lg-4">
-									<FormLabel className="modal-label">Email:</FormLabel>
+								<div class="row form_control">
+									<div class="col-lg-4">
+										<FormLabel className="modal-label">Số điện thoại:</FormLabel>
+									</div>
+									<div class="col-lg-8">
+										<FormControl id="phone" value={users && users.phoneNumber} class="pull-right"/>
+									</div>
 								</div>
-								<div class="col-lg-8">
-									<FormControl id="email" value={users && users.email} type="email" class="pull-right"/>
+								<div class="row form_control">
+									<div class="col-lg-4">
+										<FormLabel className="modal-label">Loại phòng:</FormLabel>
+									</div>
+									<div class="col-lg-8">
+										<FormControl as="select" id="room" onChange={this.handleFolderChange} class="pull-right">
+											{data.roomtype && data.roomtype.map((roomtype, i) => <option value={(roomtype)} >{roomtype}</option>)}
+										</FormControl>
+									</div>
 								</div>
-							</div>
-                            <div class="row form_control">
-								<div class="col-lg-4">
-									<FormLabel className="modal-label">Số điện thoại:</FormLabel>
+								<div class="row form_control">
+									<div class="col-lg-4">
+										<FormLabel className="modal-label">Thời gian:</FormLabel>
+									</div>
+									<div class="col-lg-8">
+										<FormControl id="time" type="datetime-local" class="pull-right" />
+									</div>
 								</div>
-								<div class="col-lg-8">
-									<FormControl id="phone" value={users && users.phoneNumber} class="pull-right"/>
-								</div>
-							</div>
-                            <div class="row form_control">
-								<div class="col-lg-4">
-									<FormLabel className="modal-label">Loại phòng:</FormLabel>
-								</div>
-								<div class="col-lg-8">
-									<FormControl as="select" id="room" onChange={this.handleFolderChange} class="pull-right">
-                                        {data.roomtype && data.roomtype.map((roomtype, i) => <option value={(roomtype)} >{roomtype}</option>)}
-                                    </FormControl>
-								</div>
-							</div>
 							</Modal.Body>
 							<Modal.Footer>
 								<Button variant="primary" className="button-apply" onClick={this.handleSubmit}>OK</Button>
