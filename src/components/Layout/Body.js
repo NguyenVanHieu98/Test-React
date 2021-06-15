@@ -25,7 +25,7 @@ class Body extends Component {
         this.state = {
             openModal: false,
             runData: '1',
-            cityName: ''
+            webName: ''
         }
     }
 
@@ -48,9 +48,9 @@ class Body extends Component {
         let data;
         let dataMyApp = await (await MyAppService.getAll()).data.myapp;
         let listName = dataMyApp.map(dataMyApp => dataMyApp.name);
-        if (this.state.cityName === 'tripadvisor.com.vn') {
+        if (this.state.webName === 'tripadvisor.com.vn') {
             data = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
-        } else if (this.state.cityName === 'booking.com') {
+        } else if (this.state.webName === 'booking.com') {
             data = await (await BookingDataService.getAll()).data.bookinghanoi;
         }
         for (var i = 0; i < data.length; i++) {
@@ -89,7 +89,7 @@ class Body extends Component {
                 data[i].comment = [];
             } else {
                 for(var k = 0; k < data[i].comment.length; k++) {
-                    data[i].comment[k] += '  ' + this.state.cityName
+                    data[i].comment[k] += '  ' + this.state.webName
                 }
                 for (var j = 0; j < data[i].comment.length; j++) {
                     if (myData && myData.comment.includes(data[i].comment[j])) {
@@ -129,16 +129,16 @@ class Body extends Component {
         this.setState({
             openModal: true,
         });
-        const cityName = document.getElementById('cityName').value;
-        if (cityName === 'tripadvisor.com.vn'){
+        const webName = document.getElementById('webName').value;
+        if (webName === 'tripadvisor.com.vn'){
             run = await (await TripadvisorDataService.tripadvisorCrawl()).data;
-        } else if (cityName === 'booking.com'){
+        } else if (webName === 'booking.com'){
             run = await (await BookingDataService.bookingCrawl()).data;
         }
         // const run = await (await TaskDataService.run()).data;
         await this.setState({
             runData: run,
-            cityName
+            webName
         });
     }
 
@@ -172,11 +172,13 @@ class Body extends Component {
     }
 
     createCheckbox = label => (
-        <Checkbox
-            label={label}
-            handleCheckboxChange={this.toggleCheckbox}
-            key={label}
-        />
+        <div className="col-lg-6">
+            <Checkbox
+                label={label}
+                handleCheckboxChange={this.toggleCheckbox}
+                key={label}
+            />
+        </div>
     )
 
     createCheckboxes = () => (
@@ -191,18 +193,27 @@ class Body extends Component {
                     showModal={openModal}
                 />
                 <Form className="form" >
-                    <Form.Label className="form-label">Lựa chọn trang web để thu thập dữ liệu: </Form.Label>
-                    <Form.Control as="select" id="cityName" className="form-control">
+                    <Form.Label className="form-label">Lựa chọn nguồn thu thập dữ liệu: </Form.Label>
+                </Form>
+                <Form className="form_select" inline>
+                    <Form.Control as="select" id="webName" className="form-control">
                         <option>tripadvisor.com.vn</option>
                         <option>booking.com</option>
-                        <option>ivivu.com</option>
-                        <option>agoda.com</option>
                     </Form.Control>
-                    <Form.Label className="form-label">Các tiêu chí muốn thu thập: </Form.Label>
-                    <div className="col-sm-12">
+                    <Form.Control as="select" id="cityName" className="form-control">
+                        <option>Ha Noi</option>
+                        <option>Thanh pho Ho Chi Minh</option>
+                        <option>Da Nang</option>
+                        <option>Can Tho</option>
+                    </Form.Control>
+                </Form>
+                <Form>
+                    <Form.Label className="form form-label">Các tiêu chí muốn thu thập: </Form.Label>
+                    <div className="form_select">
                         <form onSubmit={this.handleStart}>
-                            {this.createCheckboxes()}
-                            {/* <Button variant="primary" className="button-start" type="submit">Start</Button> */}
+                            <div className="checkbox_container">
+                                {this.createCheckboxes()}
+                            </div>
                         </form>
                     </div>
                     <Button variant="primary" className="button-start" onClick={this.handleStart}>Start</Button>

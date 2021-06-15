@@ -46,7 +46,12 @@
 .form {
     width: 100%;
     padding-top: 10px !important;
-    padding-left: 350px !important;
+    padding-left: 450px !important;
+}
+
+.form_select {
+    padding-left: 275px !important;
+    margin-bottom: 50px;
 }
 
 .form-label {
@@ -63,11 +68,16 @@
 .button-start {
     align-items: center;
     margin-top: 50px;
-    margin-left: 200px;
+    margin-left: 500px;
     margin-bottom: 50px;
     width: 200px;
 }
 
 .menubar {
     margin-bottom: 100px;
+}
+
+.checkbox_container {
+    display: flex;
+    flex-flow: row wrap;
 }

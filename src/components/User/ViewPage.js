@@ -90,8 +90,9 @@ class ViewPage extends Component {
                 <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px', fontFamily: '"Old Standard TT", sans-serif'}}>Tiện nghi khách sạn</h2>
                 <div className="convenient_container">
                     {data.convenient && data.convenient.map((convenient, i) =>
-                        <div className="convenient" key={i}>* {convenient}</div>
-                    )}
+                        <div className="col-lg-3 room_type_form">
+                            <div className="roomtype" key={i}>{convenient}</div>
+                        </div>                    )}
                 </div>
             </div>
             <div className="hotel_roomtype">

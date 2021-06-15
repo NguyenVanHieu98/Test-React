@@ -70,8 +70,8 @@ class DataProcessing extends Component {
                                 <td>{data.roomtype ? data.roomtype.length : ''}</td>
                                 <td>{data.comment ? data.comment.length : ''}</td>
                                 {/* <td>1234567 VND</td> */}
-                                <td><input type="checkbox" onChange={(e) => this.handleInputChange(e, data._id)}/>
-                                <Button variant="secondary" size="sm" >Delete</Button>
+                                <td>
+                                    <Button variant="secondary" size="sm" >Delete</Button>
                                 </td>
                             </tr>
                         )}

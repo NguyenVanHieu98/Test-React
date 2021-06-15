@@ -112,11 +112,11 @@
 
 .hotel_container {
     display: flex;
-    border: 1px solid white;
-    height: 200px;
     margin: 20px;
+    margin-left: 150px;
     position: relative;
-    background-color: rgb(247, 230, 155);
+    border-style: groove;
+    padding: 10px;
 }
 
 .hotel_name {
@@ -138,11 +138,14 @@
 .hotel_img {
     display: flex;
     height: 198px;
-    width: 500px;
+    width: 400px;
+    margin-left: none !important;
+}
+.img {
+    margin-left: none !important;
 }
 
 .title {
-    background-color: rgb(247, 230, 155);
     width: 600px;
 }
 
@@ -183,4 +186,9 @@
 {
 	background-color: #555;
 	border-radius: 10px;
+}
+
+.slide-bar {
+    background-color: rgb(196, 225, 233);
+    border-bottom: groove;
 }

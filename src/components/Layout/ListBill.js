@@ -34,6 +34,16 @@ class ListBill extends Component {
           (err) => console.log(err)
         );
     }
+
+    applyBill(id)
+    {
+        const isApply = window.confirm("Chấp nhận yêu cầu và gửi mail đến cho khách hàng ?");
+        if (!isApply) return;
+        BillService.applyBill(id).then(
+          (res) => this.componentDidMount(),
+          (err) => console.log(err)
+        );
+    }
   
 
     render() {
@@ -65,8 +75,12 @@ class ListBill extends Component {
                                         <td>{bill.phone}</td>
                                         <td>{bill.hotel}</td>
                                         <td>{bill.room}</td>
-                                        <td><Button variant="secondary" size="sm" 
-                                            onClick={(e) => this.deleteBill(bill._id, e)}>Delete</Button></td>
+                                        <td>
+                                            <Button variant="secondary" size="sm" 
+                                            onClick={(e) => this.deleteBill(bill._id, e)}>Delete</Button>
+                                            <Button variant="primary" size="sm" style={{marginTop: '2px'}} 
+                                            onClick={(e) => this.applyBill(bill._id, e)}> Apply </Button>
+                                        </td>
                                     </tr>  
                                     ))}
                               </tbody>

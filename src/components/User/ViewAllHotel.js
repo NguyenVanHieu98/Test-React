@@ -66,11 +66,13 @@ class ViewAllHotel extends Component {
     render() {
         const { data, showBill } = this.state;
         const users = firebase.auth().currentUser;
+        console.log(users)
         return (<>
-            <div style={{ backgroundColor: 'aqua' }}>
+            <div className="slide-bar">
                 <ListBill
                     showBill={showBill}
                     handleClose={() => this.setState({ showBill: false })}
+                    user={users}
                 />
                 <Nav>
                     <Nav.Item>
@@ -89,9 +91,12 @@ class ViewAllHotel extends Component {
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item style={{ marginLeft: '500px' }}>
-                        <Nav.Link onClick={this.handleShowBill} style={{ color: "red" }}>
-                            Lịch sử
-                        </Nav.Link>
+                        {users ? (       
+                            <Nav.Link onClick={this.handleShowBill} style={{ color: "red" }}>
+                                Lịch sử
+                            </Nav.Link>
+                            ): null
+                        }
                     </Nav.Item>
                     <Nav.Item style={{ marginLeft: '30px' }}>
                         {users ? (
@@ -108,23 +113,25 @@ class ViewAllHotel extends Component {
                     </Nav.Item>
                 </Nav>
             </div>
-            {data.map((data) =>
-                <div className="hotel_container">
-                    <div className="title">
-                        <Link to={`/detail/${data.name}`}><div className="hotel_name">{data.name}</div></Link>
-                        <div className="hotel_place">
-                            <img className="icon" src={PlaceIcon} />
-                            <span>{this.convertPlace(data.place)}</span>
+            <div style={{marginBottom: '50px'}}>
+                {data.map((data) =>
+                    <div className="hotel_container">
+                        <div style={{ marginLeft: '150px' }}>
+                            <img className="hotel_img" src={data.img} />
                         </div>
-                        <div className="other_data">{data.comment ? data.comment.length : '0' } lượt đánh giá</div>
-                        {/* <div className="other_data">Giá tham khảo: Updating...</div> */}
+                        <div className="title">
+                            <Link to={`/detail/${data.name}`}><div className="hotel_name">{data.name}</div></Link>
+                            <div className="hotel_place">
+                                <img className="icon" src={PlaceIcon} />
+                                <span>{this.convertPlace(data.place)}</span>
+                            </div>
+                            <div className="other_data">{data.comment ? data.comment.length : '0' } lượt đánh giá</div>
+                            {/* <div className="other_data">Giá tham khảo: Updating...</div> */}
+                        </div>
                     </div>
-                    <div style={{ marginLeft: '150px' }}>
-                        <img className="hotel_img" src={data.img} />
-                    </div>
-                </div>
-            )}
-            <Footer />
+                )}
+            </div>
+            <Footer/>
         </>
         );
     }
