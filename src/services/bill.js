@@ -11,15 +11,15 @@ class BillService {
     }
 
     getBillByStatus(status) {
-        return http.get(`/bill/${status}`);
+        return http.get(`/bills/${status}`);
     }
 
-    getBillByUserAndStatus(email, status) {
-        return http.get(`/bill/${email}/${status}`);
+    getBillByUserAndStatus(email) {
+        return http.get(`/billss/${email}`);
     }
 
-    updateBill(billId) {
-        return http.put(`/bill`, { billId });
+    updateBill(billId, data) {
+        return http.put(`/bill/${billId}`, data);
     }
 
     createBill(name, email, phone, hotel, room, date, time) {

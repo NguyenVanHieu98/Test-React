@@ -27,7 +27,7 @@ class AdminPage extends Component {
   render() {
     return (
       <div className="App">
-        <Container fluid>
+        <Container fluid style={{paddingLeft: '0px'}}>
           <Header/>
           <Body/>
           <Footer/>

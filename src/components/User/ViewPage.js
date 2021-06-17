@@ -55,6 +55,7 @@ class ViewPage extends Component {
     }
 
     isString = (str) => {
+        if (!str) return false;
         console.log(str,str.indexOf("a") )
         str = str.split('booking.com').join('');
         str = str.split('tripadvisor.com.vn').join('');

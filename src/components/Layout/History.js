@@ -19,7 +19,7 @@ class History extends Component {
     componentDidMount() {
         axios.get(url_getbill)
             .then(res => {
-                const bills = res.data.bills;
+                const bills = res.data.bill;
                 this.setState({ bills })
             })
             .catch(error => console.log(error));

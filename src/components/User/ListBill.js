@@ -7,7 +7,7 @@ import Table from 'react-bootstrap/Table';
 import firebase from 'firebase';
 require('firebase/auth');
 
-const url_getbill = "http://localhost:5000/api/bill/";
+const url_getbill = "http://localhost:5000/api/billss/";
 
 class ListBill extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class ListBill extends Component {
     componentDidMount() {
         const users = firebase.auth().currentUser;
         const user = users ? users.email : 'amazinghieu98@gmail.com';
-        axios.get(url_getbill + user)
+        axios.get(url_getbill + user )
             .then(res => {
                 const bills = res.data.bill;
                 this.setState({bills})

@@ -22,8 +22,8 @@ exports.factory = function (_, util, Bill) {
     };
 
     const getBillByUser = (req, res, next) => {
-        const { email } = req.params.email;
-        Bill.find({ email: email}, function (err, bill) {
+        const email = req.params.email;
+        Bill.find({ email }, function (err, bill) {
             if (err) {
                 console.error(err);
                 res.status(404).send({
@@ -36,8 +36,8 @@ exports.factory = function (_, util, Bill) {
     };
 
     const getBillByStatus = (req, res, next) => {
-        const { status } = req.params.status;
-        Bill.find({ status: status }, function (err, bill) {
+        const status = req.params.status;
+        Bill.find({ status }, function (err, bill) {
             if (err) {
                 console.error(err);
                 res.status(404).send({
@@ -50,13 +50,13 @@ exports.factory = function (_, util, Bill) {
     };
 
     const getBillByUserAndStatus = (req, res, next) => {
-        const { email } = req.params.email;
-        const { status } = req.params.status;
-        Bill.find({ email: email, status: status }, function (err, bill) {
+        const email = req.params.email;
+        const status = '0';
+        Bill.find({ email, status }, function (err, bill) {
             if (err) {
                 console.error(err);
                 res.status(404).send({
-                    errors: [err.message],
+                    errors: [err.message, email, status],
                 });
                 return;
             }
@@ -66,7 +66,7 @@ exports.factory = function (_, util, Bill) {
 
     const updateBill = (req, res, next) => {
         const id = req.params.billId;
-        Bill.findByIdAndUpdate(id, { status: 1 })
+        Bill.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
             .then((data) => {
                 if (!data) {
                     res.status(404).send({
@@ -92,7 +92,7 @@ exports.factory = function (_, util, Bill) {
             room: room,
             date: date,
             time: time,
-            status: 0,
+            status: '0',
         }).save(function (err, bill) {
             if (err) {
                 console.error(err);

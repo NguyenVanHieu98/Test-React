@@ -19,7 +19,7 @@ class ListBill extends Component {
     componentDidMount() {
         axios.get(url_getbill)
             .then(res => {
-                const bills = res.data.bills;
+                const bills = res.data.bill;
                 this.setState({bills})
             })
             .catch(error => console.log(error));
@@ -35,11 +35,12 @@ class ListBill extends Component {
         );
     }
 
-    applyBill(id)
+    applyBill(id, data)
     {
         const isApply = window.confirm("Chấp nhận yêu cầu và gửi mail đến cho khách hàng ?");
         if (!isApply) return;
-        BillService.updateBill(id).then(
+        data.status = '1'
+        BillService.updateBill(id, data).then(
           (res) => this.componentDidMount(),
           (err) => console.log(err)
         );
@@ -79,7 +80,7 @@ class ListBill extends Component {
                                             <Button variant="secondary" size="sm" 
                                             onClick={(e) => this.deleteBill(bill._id, e)}>Delete</Button>
                                             <Button variant="primary" size="sm" style={{marginTop: '2px'}} 
-                                            onClick={(e) => this.applyBill(bill._id, e)}> Apply </Button>
+                                            onClick={(e) => this.applyBill(bill._id, bill)}> Apply </Button>
                                         </td>
                                     </tr>  
                                     ))}

@@ -1,9 +1,6 @@
 .header-background {
-    height: 170px;
-    background-color: rgb(236, 229, 124);
+    height: 100px;
     text-align: center;
-    background-image: url('../../assets/header.jpg');
-    background-size: 100% 100%;
 }
 
 .footer {
@@ -26,17 +23,18 @@
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgb(228, 132, 119);
     text-align: center;
+    background-color: rgb(240, 243, 229);
 }
 
 .menu-action {
+    padding-left: 200px;
     position: fixed;
     top: 40px;
     width: 100%;
-    background-color: #ffffff;
     text-align: center;
-    background-color: aqua;
+    border-top: outset;
+    background-color: rgb(240, 243, 229);
 }
 
 .h1 {

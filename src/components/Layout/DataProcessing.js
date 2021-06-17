@@ -72,6 +72,7 @@ class DataProcessing extends Component {
                                 {/* <td>1234567 VND</td> */}
                                 <td>
                                     <Button variant="secondary" size="sm" >Delete</Button>
+                                    <Button variant="primary" size="sm" style={{marginTop: '5px'}} >View</Button>
                                 </td>
                             </tr>
                         )}

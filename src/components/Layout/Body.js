@@ -8,6 +8,7 @@ import TripadvisorDataService from "../../services/tripadvisor";
 import MyAppService from "../../services/myApp.service";
 import RunningModal from "../Modal/RunningModal";
 import Checkbox from './Checkbox';
+import Slidebar from "./Slidebar";
 
 const items = [
     'Name',
@@ -75,15 +76,39 @@ class Body extends Component {
             }
             if (!selectData.includes('Image')) {
                 data[i].img = [];
+            } else {
+                for (var j = 0; j < data[i].img.length; j++) {
+                    if (myData && myData.img.includes(data[i].img[j])) {
+                        delete data[i].img[j];  
+                    }
+                }
             }
             if (!selectData.includes('Review')) {
                 data[i].review = [];
+            } else {
+                for (var j = 0; j < data[i].review.length; j++) {
+                    if (myData && myData.review.includes(data[i].review[j])) {
+                        delete data[i].review[j];  
+                    }
+                }
             }
             if (!selectData.includes('Convenient')) {
                 data[i].convenient = [];
+            } else {
+                for (var j = 0; j < data[i].convenient.length; j++) {
+                    if (myData && myData.convenient.includes(data[i].convenient[j])) {
+                        delete data[i].convenient[j];  
+                    }
+                }
             }
             if (!selectData.includes('Roomtype')) {
                 data[i].roomtype = [];
+            } else {
+                for (var j = 0; j < data[i].roomtype.length; j++) {
+                    if (myData && myData.roomtype.includes(data[i].roomtype[j])) {
+                        delete data[i].roomtype[j];  
+                    }
+                }
             }
             if (!selectData.includes('Comment')) {
                 data[i].comment = [];
@@ -94,6 +119,9 @@ class Body extends Component {
                 for (var j = 0; j < data[i].comment.length; j++) {
                     if (myData && myData.comment.includes(data[i].comment[j])) {
                         delete data[i].comment[j];  
+                    }
+                    if (data[i].comment[j] === "") {
+                        delete data[i].comment[j]; 
                     }
                 }
                 console.log(data[i].comment);
@@ -165,19 +193,6 @@ class Body extends Component {
         });
     }
 
-    // handleMergeData = async () => {
-    //     const dataBooking = await (await BookingDataService.getAll()).data.bookinghanoi;
-    //     const dataTripadvisor = await (await TripadvisorDataService.getAll()).data.tripadvisorhanoi;
-    //     const listName = dataTripadvisor.map(dataTripadvisor => dataTripadvisor.name);
-    //     for (var i = 0; i < dataBooking.length; i++) {
-    //         if (listName.includes(dataBooking[i].name)) {
-    //             await TripadvisorDataService.updateDataHotel(dataBooking[i].name, dataBooking[i].roomtype, dataBooking[i].comment);
-    //         }
-    //     }
-    //     const number = dataTripadvisor.length;
-    //     return window.alert(`Crawl thành công, dữ liệu hiện tại có ${number} bản ghi`);
-    // }
-
     toggleCheckbox = label => {
         if (this.selectedCheckboxes.has(label)) {
             this.selectedCheckboxes.delete(label);
@@ -212,6 +227,7 @@ class Body extends Component {
         const { openModal } = this.state;
         return (
             <div>
+                <Slidebar isCrawl={true}/>
                 <RunningModal
                     showModal={openModal}
                 />

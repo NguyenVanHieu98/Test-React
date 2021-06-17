@@ -69,11 +69,13 @@ class ViewAllHotel extends Component {
         console.log(users)
         return (<>
             <div className="slide-bar">
-                <ListBill
-                    showBill={showBill}
-                    handleClose={() => this.setState({ showBill: false })}
-                    user={users}
-                />
+                {showBill && 
+                    <ListBill
+                        showBill={showBill}
+                        handleClose={() => this.setState({ showBill: false })}
+                        user={users}
+                    />
+                }
                 <Nav>
                     <Nav.Item>
                         <Nav.Link style={{ color: "red" }}>Bạn muốn đi đâu:

@@ -18,7 +18,7 @@ exports.factory = function (mongoose) {
             room: String,
             date: String,
             time: String,
-            status: Number,
+            status: String,
         })
     );
 };
