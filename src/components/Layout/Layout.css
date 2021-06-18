@@ -11,13 +11,15 @@
     background-color: rgb(233, 93, 74);
     color: white;
     text-align: center;
-    height: 30px;
+    height: 50px;
 }
 
 .footer-text {
     position: absolute;
     left: 5px;
     color: #ffffff;
+    word-wrap: break-word;
+    max-width: 250px;
 }
 
 .footer-time {

@@ -33,7 +33,7 @@ class Footer extends React.Component {
               target="_blank"
               rel="noopener noreferrer"
           >
-            Nguyen Van Hieu
+            Nguyen Van Hieu <br/>
           </a> Đại học Bách Khoa Hà Nội
           <a className="footer-time">{this.state.date.toLocaleTimeString()}</a>
         </div>

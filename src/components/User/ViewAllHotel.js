@@ -93,8 +93,8 @@ class ViewAllHotel extends Component {
                 }
                 <Nav>
                     <Nav.Item>
-                        <Nav.Link style={{ color: "red" }}>Bạn muốn đi đâu:
-                            <Form as="select" style={{ "margin-left": "5px", border: "none", "background-color": "white", color: "red" }}>
+                        <Nav.Link >Bạn muốn đi đâu:
+                            <Form as="select" style={{ "margin-left": "5px", border: "none", "background-color": "white"}}>
                                 <option>Hà Nội</option>
                                 <option>Đà Nẵng</option>
                                 <option>Đà Lạt</option>
@@ -103,30 +103,35 @@ class ViewAllHotel extends Component {
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link style={{ color: "red" }}>
-                            <input type="text" style={{ "margin-left": "5px", border: "none", "width": "300%", "background-color": "white", color: "red" }} placeholder="Search by name..." ref={input => this.search = input} onChange={this.handleInputChange} />
+                        <Nav.Link >
+                            <input type="text" style={{ "margin-left": "5px", border: "none", "width": "300%", "background-color": "white"}} placeholder="Search by name..." ref={input => this.search = input} onChange={this.handleInputChange} />
                         </Nav.Link>
                     </Nav.Item>       
                     {users ? (       
-                        <Nav.Item style={{ marginLeft: '50px' }}>
-                            <Nav.Link onClick={this.handleShowBill} style={{ color: "red" }}>
+                        <Nav.Item style={{ marginLeft: '420px' }}>
+                            <Nav.Link onClick={this.handleShowBill}>
                                 Yêu cầu
                             </Nav.Link>
-                            <Nav.Link onClick={this.handleShowHistory} style={{ color: "red" }}>
+                        </Nav.Item>
+                        ): null
+                    }
+                    {users ? (       
+                        <Nav.Item style={{ marginLeft: '20px' }}>
+                            <Nav.Link onClick={this.handleShowHistory}>
                                 Lịch sử
                             </Nav.Link>
                         </Nav.Item>
                         ): null
                     }
-                    <Nav.Item style={{ marginLeft: '30px' }}>
+                    <Nav.Item style={{ marginLeft: '20px' }}>
                         {users ? (
                             <Nav.Link onClick={() => {
                                 auth.signOut();
-                            }} style={{ color: "red" }}>
+                            }}>
                                 Đăng xuất
                             </Nav.Link>
                         ) : (
-                                <Nav.Link onClick={signInWithGoogle} style={{ color: "red" }}>
+                                <Nav.Link onClick={signInWithGoogle} style={{ marginLeft: '400px' }}>
                                     Đăng nhập
                                 </Nav.Link>
                             )}

@@ -27,11 +27,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={AdminPage} />
+          <Route path="/admin/crawl" exact component={AdminPage} />
           <Route path="/home" exact component={Homepage} />
           <Route path="/verify/:shareID" component={verifyPage} />
           <Route path="/showNote/:shareID" component={ShowNote} />
-          <Route path="/data-processing" exact component={DataProcessing} />
+          <Route path="/admin/data-manager" exact component={DataProcessing} />
           <Route path="/detail/:hotelName" exact component={ViewPage} />
           <Route path="/user" exact component={ViewAllHotel} />
           <Route path="/user/:hotelName" exact component={ViewAllHotel} />

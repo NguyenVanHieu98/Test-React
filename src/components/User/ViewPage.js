@@ -96,9 +96,11 @@ class ViewPage extends Component {
                     <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px', fontFamily: '"Old Standard TT", sans-serif'}}>Tiện nghi khách sạn</h2>
                     <div className="convenient_container">
                         {data.convenient && data.convenient.map((convenient, i) =>
+                            this.isString(convenient) ? (
                             <div className="col-lg-3 room_type_form">
                                 <div className="roomtype" key={i}>{convenient}</div>
-                            </div>                    
+                            </div>  
+                            ) : null                  
                             )}
                     </div>
                 </div>
@@ -108,9 +110,11 @@ class ViewPage extends Component {
                     <h2 className="name" style={{ paddingTop: '50px', paddingBottom: '50px', fontFamily: '"Old Standard TT", sans-serif'}}>Loại phòng phổ biến</h2>
                     <div className="convenient_container">
                         {data.roomtype.map((roomtype, i) =>
+                            this.isString(roomtype) ? (
                             <div className="col-lg-3 room_type_form">
                                 <div className="roomtype" key={i}>{roomtype}</div>
                             </div>
+                            ) : null
                         )}
                     </div>
                 </div>

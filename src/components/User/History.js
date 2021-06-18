@@ -35,7 +35,7 @@ class History extends Component {
                 <Modal id="modal" class="modal" size="lg" show={showHistory} onHide={() => handleClose()}>
                     <Form id="history-form">
                         <Modal.Header id="modal_header" closeButton>
-                            <Modal.Title style={{ marginLeft: '180px' }}>Lịch sử đặt phòng</Modal.Title>
+                            <Modal.Title style={{ marginLeft: '120px' }}>Lịch sử đặt phòng</Modal.Title>
                         </Modal.Header>
                         <Modal.Body id="modal_body1">
                             {bills.length > 0 ? (

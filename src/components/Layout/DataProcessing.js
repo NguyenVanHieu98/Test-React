@@ -7,6 +7,7 @@ import MyAppService from "../../services/myApp.service";
 import MenuAction from "./MenuAction";
 import Slidebar from "./Slidebar";
 import Footer from "./Footer";
+import { Link } from 'react-router-dom';
 
 class DataProcessing extends Component {
     constructor(props) {
@@ -72,7 +73,9 @@ class DataProcessing extends Component {
                                 {/* <td>1234567 VND</td> */}
                                 <td>
                                     <Button variant="secondary" size="sm" >Delete</Button>
-                                    <Button variant="primary" size="sm" style={{marginTop: '5px'}} >View</Button>
+                                    <Link to={`/detail/${data.name}`}>
+                                        <Button variant="primary" size="sm" style={{marginTop: '5px'}} >View</Button>
+                                    </Link>
                                 </td>
                             </tr>
                         )}

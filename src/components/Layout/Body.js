@@ -61,14 +61,14 @@ class Body extends Component {
             const myData = await (await MyAppService.getDataByName(data[i].name)).data.myapp[0];
             console.log(myData);
             if (!selectData.includes('District')) {
-                if (myData.district !== undefined) {
+                if (myData && myData.district !== undefined) {
                     data[i].district = myData.district;
                 } else {
                     data[i].district = null;
                 }
             }
             if (!selectData.includes('Place')) {
-                if (myData.place !== undefined) {
+                if (myData && myData.place !== undefined) {
                     data[i].place = myData.place;
                 } else {
                     data[i].place = null;

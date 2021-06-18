@@ -75,7 +75,7 @@ class ListBill extends Component {
                 <Modal id="modal" class="modal" size="lg" show={showBill} onHide={() => handleClose()}>
                     <Form id="history-form">
                         <Modal.Header id="modal_header" closeButton>
-                            <Modal.Title style={{ marginLeft: '180px' }}>Danh sách đơn yêu cầu</Modal.Title>
+                            <Modal.Title style={{ marginLeft: '100px' }}>Danh sách đơn yêu cầu</Modal.Title>
                         </Modal.Header>
                         <Modal.Body id="modal_body1">
                             <Table>
