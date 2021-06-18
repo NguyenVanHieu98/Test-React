@@ -27,14 +27,14 @@ class Footer extends React.Component {
     render() {
       return (
         <div className="footer">
-            <span>Nguyen Van Hieu &copy; 1998 </span>
-            <a
-                href="https://www.facebook.com/nguyenvanhieu.supreme/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Su
-            </a>
+          <span className="footer-text">Hệ thống thu thập dữ liệu khách sạn và hỗ trợ đặt phòng khách sạn</span>
+          <a
+              href="https://www.facebook.com/nguyenvanhieu.supreme/"
+              target="_blank"
+              rel="noopener noreferrer"
+          >
+            Nguyen Van Hieu
+          </a> Đại học Bách Khoa Hà Nội
           <a className="footer-time">{this.state.date.toLocaleTimeString()}</a>
         </div>
       );

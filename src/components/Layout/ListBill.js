@@ -55,17 +55,19 @@ class ListBill extends Component {
                 <Modal id="modal" class="modal" size="lg" show={showBill} onHide={() => handleClose()}>
                     <Form id="history-form">
                         <Modal.Header id="modal_header" closeButton>
-                            <Modal.Title style={{ marginLeft: '180px' }}>LIST BILL</Modal.Title>
+                            <Modal.Title style={{ marginLeft: '180px' }}>Danh sách đơn yêu cầu</Modal.Title>
                         </Modal.Header>
                         <Modal.Body id="modal_body1">
                             <Table>
                               <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Tên</th>
                                     <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th>Hotel</th>
-                                    <th>Room</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Khách sạn</th>
+                                    <th>Loại phòng</th>
+                                    <th>Ngày nhận phòng</th>
+                                    <th>Giờ nhận phòng</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -76,6 +78,8 @@ class ListBill extends Component {
                                         <td>{bill.phone}</td>
                                         <td>{bill.hotel}</td>
                                         <td>{bill.room}</td>
+                                        <td>{bill.date}</td>
+                                        <td>{bill.time}</td>
                                         <td>
                                             <Button variant="secondary" size="sm" 
                                             onClick={(e) => this.deleteBill(bill._id, e)}>Delete</Button>

@@ -33,25 +33,25 @@ class Slidebar extends Component {
                 {isCrawl ? (
                     <Nav>
                         <Nav.Item>
-                            <Nav.Link href="/">Crawl Data</Nav.Link>
+                            <Nav.Link href="/">Thu thập dữ liệu</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="/data-processing">Data Processing</Nav.Link>
+                            <Nav.Link href="/data-processing">Xử lý dữ liệu</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 ) : (
                     <Nav>
                         <Nav.Item>
-                            <Nav.Link href="/">Crawl Data</Nav.Link>
+                            <Nav.Link href="/">Thu thập dữ liệu</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="/data-processing">Data Processing</Nav.Link>
+                            <Nav.Link href="/data-processing">Xử lý dữ liệu</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={this.handleShowBill}>List Bill</Nav.Link>
+                            <Nav.Link onClick={this.handleShowBill}>Danh sách đơn</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={this.handleShowHistory}>History</Nav.Link>
+                            <Nav.Link onClick={this.handleShowHistory}>Lịch sử</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 )}

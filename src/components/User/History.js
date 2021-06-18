@@ -7,7 +7,7 @@ import Table from 'react-bootstrap/Table';
 import firebase from 'firebase';
 require('firebase/auth');
 
-const url_getbill = "http://localhost:5000/api/bills/1";
+const url_getbill = "http://localhost:5000/api/billsss/";
 
 class History extends Component {
     constructor(props) {
@@ -17,7 +17,9 @@ class History extends Component {
         };
     }
     componentDidMount() {
-        axios.get(url_getbill)
+        const users = firebase.auth().currentUser;
+        const user = users ? users.email : 'amazinghieu98@gmail.com';
+        axios.get(url_getbill + user)
             .then(res => {
                 const bills = res.data.bill;
                 this.setState({ bills })
@@ -33,33 +35,32 @@ class History extends Component {
                 <Modal id="modal" class="modal" size="lg" show={showHistory} onHide={() => handleClose()}>
                     <Form id="history-form">
                         <Modal.Header id="modal_header" closeButton>
-                            <Modal.Title style={{ marginLeft: '180px' }}>Lịch sử</Modal.Title>
+                            <Modal.Title style={{ marginLeft: '180px' }}>Lịch sử đặt phòng</Modal.Title>
                         </Modal.Header>
                         <Modal.Body id="modal_body1">
-                            <Table>
-                                <thead>
-                                    <tr>
-                                        <th>Tên</th>
-                                        <th>Email</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Khách sạn</th>
-                                        <th>Loại phòng</th>
-                                        <th>Ngày cho thuê</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {bills && bills.map((bill) => (
-                                        <tr>
-                                            <td>{bill.name}</td>
-                                            <td>{bill.email}</td>
-                                            <td>{bill.phone}</td>
-                                            <td>{bill.hotel}</td>
-                                            <td>{bill.room}</td>
-                                            <td>{bill.date}</td>
+                            {bills.length > 0 ? (
+                                <Table>
+                                    <thead>
+                                        <tr> 
+                                            <th>Khách sạn</th>
+                                            <th>Loại phòng</th>
+                                            <th>Ngày nhận phòng</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
+                                    </thead>
+                                    <tbody>
+                                        {bills && bills.map((bill) => (
+                                            <tr>
+                                                <td>{bill.hotel}</td>
+                                                <td>{bill.room}</td>
+                                                <td>{bill.date}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            ) : (
+                                ""
+                            )
+                            }
                         </Modal.Body>
                         <Modal.Footer id="modal_footer">
                             <Button variant="danger" onClick={() => handleClose()}>

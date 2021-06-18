@@ -17,6 +17,7 @@ import 'firebase/auth';
 import { auth } from "../../firebase";
 import { signInWithGoogle } from "../../firebase";
 import ListBill from './ListBill';
+import History from './History';
 import MyAppService from "../../services/myApp.service";
 
 class ViewAllHotel extends Component {
@@ -24,7 +25,8 @@ class ViewAllHotel extends Component {
         super(props);
         this.state = {
             data: [],
-            showBill: false
+            showBill: false,
+            showHistory: false
         };
         this.setStateAsync = setStateAsync.bind(this);
     }
@@ -63,8 +65,14 @@ class ViewAllHotel extends Component {
         })
     }
 
+    handleShowHistory = () => {
+        this.setState({
+            showHistory: true,
+        })
+    }
+
     render() {
-        const { data, showBill } = this.state;
+        const { data, showBill, showHistory } = this.state;
         const users = firebase.auth().currentUser;
         console.log(users)
         return (<>
@@ -73,6 +81,13 @@ class ViewAllHotel extends Component {
                     <ListBill
                         showBill={showBill}
                         handleClose={() => this.setState({ showBill: false })}
+                        user={users}
+                    />
+                }
+                {showHistory &&
+                    <History
+                        showHistory={showHistory}
+                        handleClose={() => this.setState({ showHistory: false })}
                         user={users}
                     />
                 }
@@ -91,15 +106,18 @@ class ViewAllHotel extends Component {
                         <Nav.Link style={{ color: "red" }}>
                             <input type="text" style={{ "margin-left": "5px", border: "none", "width": "300%", "background-color": "white", color: "red" }} placeholder="Search by name..." ref={input => this.search = input} onChange={this.handleInputChange} />
                         </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item style={{ marginLeft: '500px' }}>
-                        {users ? (       
+                    </Nav.Item>       
+                    {users ? (       
+                        <Nav.Item style={{ marginLeft: '50px' }}>
                             <Nav.Link onClick={this.handleShowBill} style={{ color: "red" }}>
+                                Yêu cầu
+                            </Nav.Link>
+                            <Nav.Link onClick={this.handleShowHistory} style={{ color: "red" }}>
                                 Lịch sử
                             </Nav.Link>
-                            ): null
-                        }
-                    </Nav.Item>
+                        </Nav.Item>
+                        ): null
+                    }
                     <Nav.Item style={{ marginLeft: '30px' }}>
                         {users ? (
                             <Nav.Link onClick={() => {

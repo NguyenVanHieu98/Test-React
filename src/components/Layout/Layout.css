@@ -11,6 +11,13 @@
     background-color: rgb(233, 93, 74);
     color: white;
     text-align: center;
+    height: 30px;
+}
+
+.footer-text {
+    position: absolute;
+    left: 5px;
+    color: #ffffff;
 }
 
 .footer-time {

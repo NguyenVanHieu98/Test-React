@@ -18,6 +18,10 @@ class BillService {
         return http.get(`/billss/${email}`);
     }
 
+    getBillByUserAndStatus1(email) {
+        return http.get(`/billsss/${email}`);
+    }
+
     updateBill(billId, data) {
         return http.put(`/bill/${billId}`, data);
     }

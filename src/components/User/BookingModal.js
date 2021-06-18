@@ -4,6 +4,9 @@ import "./User.css";
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import BillService from "../../services/bill";
+import axios from 'axios';
+
+const url_send_mail = "http://localhost:3002/send";
 
 class BookingModal extends Component {
 	constructor(props) {
@@ -25,6 +28,25 @@ class BookingModal extends Component {
 		const date = dateTime[0];
 		const time = dateTime[1];
 		await BillService.createBill(name, email, phone, hotel, room, date, time); 
+		axios({
+			method: "POST",
+			url: url_send_mail,
+			data: {
+				name: name,
+				email: email,
+				hotel: hotel,
+				room: room,
+				date: date,
+				time: time
+			}
+		}).then((response) => {
+			if (response.data.msg === 'success') {
+				alert("Message Sent.");
+				this.resetForm();
+			} else if (response.data.msg === 'fail') {
+				alert("Message failed to send.")
+			}
+		})
 		this.props.handleClose();
 	}
 

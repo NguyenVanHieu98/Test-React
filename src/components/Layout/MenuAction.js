@@ -31,7 +31,7 @@ class MenuAction extends Component {
             <div className="menu-action">
                 <Nav>
                     <Nav.Item>
-                        <Nav.Link>Search by city: 
+                        <Nav.Link>Tìm kiếm theo thành phố: 
                             <Form as="select" style={{"margin-left": "5px", borderStyle: "ridge", "background-color": "white", height: '30px' }}>
                                 <option>Hà Nội</option>
                                 <option>Đà Nẵng</option>
@@ -42,7 +42,7 @@ class MenuAction extends Component {
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link style={{color: "red" }}>                           
-                            <input type="text" style={{"margin-left": "5px",borderStyle: 'grove', "width": "300%", "background-color": "white" }} placeholder="Search by name..." ref={input => this.search = input} onChange={this.handleInputChange}/>
+                            <input type="text" style={{"margin-left": "5px",borderStyle: 'grove', "width": "300%", "background-color": "white" }} placeholder="Tìm kiếm theo tên khách sạn..." ref={input => this.search = input} onChange={this.handleInputChange}/>
                         </Nav.Link>
                     </Nav.Item>
                 </Nav>

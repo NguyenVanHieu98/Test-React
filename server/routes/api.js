@@ -88,6 +88,7 @@ exports.factory = function (express,
     router.get("/bill/:email", billController.getBillByUser);
     router.get("/bills/:status", billController.getBillByStatus);
     router.get("/billss/:email", billController.getBillByUserAndStatus);
+    router.get("/billsss/:email", billController.getBillByUserAndStatus1);
     router.put("/bill/:billId", billController.updateBill);
     router.delete("/bill/:billId", billController.deleteBill);
 

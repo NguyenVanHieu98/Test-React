@@ -56,7 +56,22 @@ exports.factory = function (_, util, Bill) {
             if (err) {
                 console.error(err);
                 res.status(404).send({
-                    errors: [err.message, email, status],
+                    errors: [err.message],
+                });
+                return;
+            }
+            res.json({ bill });
+        });
+    };
+
+    const getBillByUserAndStatus1 = (req, res, next) => {
+        const email = req.params.email;
+        const status = '1';
+        Bill.find({ email, status }, function (err, bill) {
+            if (err) {
+                console.error(err);
+                res.status(404).send({
+                    errors: [err.message],
                 });
                 return;
             }
@@ -126,6 +141,7 @@ exports.factory = function (_, util, Bill) {
         getBillByUser,
         getBillByStatus,
         getBillByUserAndStatus,
+        getBillByUserAndStatus1,
         updateBill,
         newBill,
         deleteBill
