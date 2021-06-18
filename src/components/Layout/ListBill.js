@@ -8,6 +8,7 @@ import firebase from 'firebase';
 require('firebase/auth');
 
 const url_getbill = "http://localhost:5000/api/bills/0";
+const url_send_mail = "http://localhost:3002/sendApply";
 
 class ListBill extends Component {
     constructor(props) {
@@ -41,7 +42,26 @@ class ListBill extends Component {
         if (!isApply) return;
         data.status = '1'
         BillService.updateBill(id, data).then(
-          (res) => this.componentDidMount(),
+          (res) => {
+            this.componentDidMount();
+            axios({
+                method: "POST",
+                url: url_send_mail,
+                data: {
+                    name: data.name,
+                    email: data.email,
+                    hotel: data.hotel,
+                    room: data.room,
+                    date: data.date,
+                    time: data.time
+                }
+            }).then((response) => {
+                if (response.data.msg === 'success') {
+                    alert("Gửi thông báo cho khách hàng thành công.");
+                } else if (response.data.msg === 'fail') {
+                    alert("Gửi thông báo cho khách hàng thất bại.")
+                }
+            })},
           (err) => console.log(err)
         );
     }

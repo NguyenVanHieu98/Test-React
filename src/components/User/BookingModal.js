@@ -27,26 +27,26 @@ class BookingModal extends Component {
 		const dateTime = document.getElementById('time').value.split('T', 2);
 		const date = dateTime[0];
 		const time = dateTime[1];
-		await BillService.createBill(name, email, phone, hotel, room, date, time); 
-		axios({
-			method: "POST",
-			url: url_send_mail,
-			data: {
-				name: name,
-				email: email,
-				hotel: hotel,
-				room: room,
-				date: date,
-				time: time
-			}
-		}).then((response) => {
-			if (response.data.msg === 'success') {
-				alert("Message Sent.");
-				this.resetForm();
-			} else if (response.data.msg === 'fail') {
-				alert("Message failed to send.")
-			}
-		})
+		await BillService.createBill(name, email, phone, hotel, room, date, time).then(res => {
+			axios({
+				method: "POST",
+				url: url_send_mail,
+				data: {
+					name: name,
+					email: email,
+					hotel: hotel,
+					room: room,
+					date: date,
+					time: time
+				}
+			}).then((response) => {
+				if (response.data.msg === 'success') {
+					alert("Gửi yêu cầu thành công.");
+				} else if (response.data.msg === 'fail') {
+					alert("Gửi yêu cầu thất bại.")
+				}
+			})})
+			.catch(error => console.log(error));
 		this.props.handleClose();
 	}
 
